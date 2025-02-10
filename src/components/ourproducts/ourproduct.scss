@@ -1,0 +1,75 @@
+.repair-services {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .product-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        list-style: none;
+        padding: 0;
+
+        li {
+            display: inline;
+            font-size: 16px;
+
+            a {
+                text-decoration: none;
+                color: #007bff;
+                font-weight: bold;
+                transition: 0.3s;
+
+                &:hover {
+                    text-decoration: underline;
+                    color: #0056b3;
+                }
+            }
+        }
+    }
+
+    .service-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .service-card {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: 0.3s ease-in-out;
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+            transform: scale(1.05);
+            background-color: #f1f1f1;
+        }
+
+        .icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .service-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
+}

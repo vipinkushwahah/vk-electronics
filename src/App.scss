@@ -1,0 +1,19 @@
+:root {
+  --bg-color: #f8f8f8;
+  --bg: rgb(225, 235, 234);
+  --text-color: #000000;
+  --button-bg: #ff9900;
+}
+
+[data-theme="dark"] {
+  --bg-color: #1d1919;
+  --bg: rgb(35, 34, 34);
+  --text-color: #ffffff;
+  --button-bg: #faf6f4;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 1.3s ease-in-out, color 1.3s ease-in-out;
+}

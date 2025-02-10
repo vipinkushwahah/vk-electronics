@@ -1,0 +1,127 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 5%;
+  background: var(--bg-color);
+  min-height: 430px;
+  overflow: hidden;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+  .hero-content {
+    max-width: 500px;
+    z-index: 2;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-color);
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: var(--text-color);
+      margin-bottom: 1.5rem;
+      transition: opacity 0.3s ease-in-out;
+    }
+  }
+
+  .hero-image-container {
+    position: relative;
+    z-index: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .hero-image {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    display: block;
+    border-radius: 100px;
+  }
+
+  // Triangle Shape
+  // &::before {
+  //   content: "";
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0px;
+  //   width: 60%;
+  //   height: 70%;
+  //   background: var(--bg);
+  //   // clip-path: polygon(114% 0%, -19% -3%, 70% 72%);
+  //   border-radius: 30% 70% 35% 65% / 35% 44% 56% 65% ;
+  //   z-index: 0;
+  // }
+
+  // Dots Navigation
+  .dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: gray;
+      border-radius: 50%;
+      opacity: 0.5;
+      transition: opacity 0.3s ease-in-out;
+      cursor: pointer;
+
+      &.active {
+        opacity: 1;
+        background: orange;
+      }
+    }
+  }
+}
+
+.product-service{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8rem;
+  padding: 52px 10px;
+  .product-service_list{
+     text-align: center;
+  }
+  .product-service_text{
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+  .product-service_list-icon{
+    font-size: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 3rem 2rem;
+
+    .hero-content {
+      max-width: 100%;
+    }
+
+    .hero-image-container {
+      margin-top: 2rem;
+    }
+
+    // Adjust triangle for mobile
+    // &::before {
+    //   width: 100%;
+    //   clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+    // }
+  }
+}
