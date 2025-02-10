@@ -1,5 +1,5 @@
 import React from "react";
-import "./Repair.scss";
+import "./repair.scss";
 
 interface RepairService {
     id: number;
