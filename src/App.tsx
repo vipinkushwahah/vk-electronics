@@ -10,6 +10,8 @@ import GadgetDetails from './components/electronic/electronicdetails/electronide
 import HomeAppliances from './components/homeappliance/homeappliance';
 import ApplianceDetails from './components/homeappliance/homeappliance/homeappliancedetails';
 import Footer from './components/fotter/fotter';
+import AddProduct from './components/addproduct/AddProduct';
+import ProductManagement from './components/product/ProductManagement';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/appliance/:id" element={<ApplianceDetails />} />
           <Route path="/gadget/:id" element={<GadgetDetails />} />
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/manage-products" element={<ProductManagement />} />
         </Routes>
       </div>
       <Footer />
