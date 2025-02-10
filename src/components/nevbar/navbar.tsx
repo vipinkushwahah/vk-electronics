@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./Navbar.scss";
+import "./navbar.scss";
 import SearchBar from "../hooks/search/search";
 import { Link } from "react-router-dom";
 
