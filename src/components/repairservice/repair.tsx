@@ -27,7 +27,7 @@ const repairServices: RepairService[] = [
     {
         id: 3,
         name: "Charger / Headphones",
-        description: "Get your cracked  Headphones or charger replaced with high-quality parts.",
+        description: "Get your cracked headphones or charger replaced with high-quality parts.",
         image: "",
         icon: "ri-customer-service-fill",
     },
@@ -41,7 +41,7 @@ const RepairServices: React.FC = () => {
             <div className="service-list">
                 {repairServices.map((service) => (
                     <div key={service.id} className="service-card">
-                        <div className={`icon ${service.icon || ""} `}>
+                        <div className={`icon ${service.icon || ""}`}>
                             {service.image?.startsWith("/") ? (
                                 <img src={service.image} alt={service.name} />
                             ) : (
@@ -49,7 +49,7 @@ const RepairServices: React.FC = () => {
                             )}
                         </div>
                         <div className="service-name">{service.name}</div>
-                        <div>{service.description}</div>
+                        <div className="service-description">{service.description}</div>
                     </div>
                 ))}
             </div>

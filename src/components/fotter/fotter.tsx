@@ -12,24 +12,25 @@ const Footer: React.FC = () => {
                         <h2>VK Electronics</h2>
                         <p>Your One-Stop Shop for Electronics & Repairs.</p>
                     </div>
+                    <div className="footer-links-container">
+                        <div className="footer-links">
+                            <h3>Quick Links</h3>
+                            <ul>
+                                <li><Link to="/">Home</Link></li>
+                                <li><Link to="/smartphone">Smartphone</Link></li>
+                                <li><Link to="/electronics">Electronics</Link></li>
+                                <li><Link to="/home-appliance"> HomeAppliances</Link></li>
+                            </ul>
+                        </div>
 
-                    <div className="footer-links">
-                        <h3>Quick Links</h3>
-                        <ul>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/products">Products</Link></li>
-                            <li><Link to="/services">Services</Link></li>
-                            <li><Link to="/contact">Contact Us</Link></li>
-                        </ul>
+                        <div className="footer-contact">
+                            <h3>Contact Us</h3>
+                            <p>Email: support@vkelectronics.com</p>
+                            <p>Phone: +91 98765 43210</p>
+                            <p>Address: Bangra Bazar, Lohari Bari, Bhatpar Rani, Deoria, Uttar Pradesh, India</p>
+                            <p>274704</p>
+                        </div>
                     </div>
-
-                    <div className="footer-contact">
-                        <h3>Contact Us</h3>
-                        <p>Email: support@vkelectronics.com</p>
-                        <p>Phone: +91 98765 43210</p>
-                        <p>Address: 123, Electronics Street, Mumbai</p>
-                    </div>
-
                     <div className="footer-social">
                         <h3>Follow Us</h3>
                         <div className="social-icons">

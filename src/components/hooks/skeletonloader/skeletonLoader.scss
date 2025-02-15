@@ -1,0 +1,110 @@
+// skeletonLoader.scss
+
+// Common styles for all skeleton loaders
+.skeleton-product-card,
+.skeleton-gadget-card {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: skeleton-loading 1.5s infinite linear;
+}
+
+// Product Loader Styles
+.skeleton-product-card {
+    width: 250px;
+    height: 300px;
+}
+
+.skeleton-product-image {
+    width: 100%;
+    height: 140px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+
+.skeleton-product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skeleton-product-title,
+.skeleton-product-price,
+.skeleton-product-description {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+
+.skeleton-product-title {
+    width: 70%;
+    height: 16px;
+}
+
+.skeleton-product-price {
+    width: 50%;
+    height: 14px;
+}
+
+.skeleton-product-description {
+    width: 80%;
+    height: 12px;
+}
+
+// Gadget Loader Styles (specific for gadgets)
+.skeleton-gadget-card {
+    width: 250px;
+    height: 300px;
+}
+
+.skeleton-gadget-image {
+    width: 100%;
+    height: 100px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+
+.skeleton-gadget-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.skeleton-gadget-title {
+    width: 60%;
+    height: 14px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+
+.skeleton-gadget-price {
+    width: 40%;
+    height: 12px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+
+.skeleton-gadget-description {
+    width: 70%;
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+}
+
+.skeleton-loader{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: -200%;
+    }
+    100% {
+        background-position: 200%;
+    }
+}

@@ -24,6 +24,9 @@ const ProductManagement: React.FC = () => {
     textColor: "#000000",
     bgColor: "#ffffff",
   });
+  
+  const [password, setPassword] = useState(""); // Password input state
+  const [isAuthorized, setIsAuthorized] = useState(false); // Authorization state
 
   useEffect(() => {
     fetchProducts();
@@ -64,34 +67,69 @@ const ProductManagement: React.FC = () => {
     fetchProducts();
   };
 
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handlePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === "vivek") {
+      setIsAuthorized(true);
+    } else {
+      alert("❌ Incorrect Password!");
+    }
+  };
+
   return (
     <div className="product-management">
-      <h2>{editingProduct ? "Edit Product" : "Add Product"}</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="Product Name" value={newProduct.name} onChange={handleChange} required />
-        <textarea name="description" placeholder="Description" value={newProduct.description} onChange={handleChange} required />
-        <input type="number" name="price" placeholder="Price (₹)" value={newProduct.price} onChange={handleChange} required />
-        <input type="text" name="image" placeholder="Image URL" value={newProduct.image} onChange={handleChange} required />
-        <label>Text Color: </label>
-        <input type="color" name="textColor" value={newProduct.textColor} onChange={handleChange} />
-        <label>Background Color: </label>
-        <input type="color" name="bgColor" value={newProduct.bgColor} onChange={handleChange} />
-        <button type="submit">{editingProduct ? "Update Product" : "Add Product"}</button>
-      </form>
+      {!isAuthorized ? (
+        <div>
+          <h2>Enter Password to Access Product Management</h2>
+          <form onSubmit={handlePasswordSubmit}>
+            <input
+              type="password"
+              placeholder="Enter Password"
+              value={password}
+              onChange={handlePasswordChange}
+              required
+            />
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      ) : (
+        <>
+          <h2>{editingProduct ? "Edit Product" : "Add Product"}</h2>
+          <form onSubmit={handleSubmit}>
+            <input type="text" name="name" placeholder="Product Name" value={newProduct.name} onChange={handleChange} required />
+            <textarea name="description" placeholder="Description" value={newProduct.description} onChange={handleChange} required />
+            <input type="number" name="price" placeholder="Price (₹)" value={newProduct.price} onChange={handleChange} required />
+            <input type="text" name="image" placeholder="Image URL" value={newProduct.image} onChange={handleChange} required />
+            <label>Text Color: </label>
+            <input type="color" name="textColor" value={newProduct.textColor} onChange={handleChange} />
+            <label>Background Color: </label>
+            <input type="color" name="bgColor" value={newProduct.bgColor} onChange={handleChange} />
+            <button type="submit">{editingProduct ? "Update Product" : "Add Product"}</button>
+          </form>
 
-      <h2>Manage Products</h2>
-      <div className="product-list">
-        {products.map((product) => (
-          <div key={product._id} className="product-card" style={{ backgroundColor: product.bgColor, color: product.textColor }}>
-            <img src={product.image} alt={product.name} />
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-            <p>Price: ₹{product.price}</p>
-            <button onClick={() => handleEdit(product)}>✏ Edit</button>
-            <button onClick={() => handleDelete(product._id)}>🗑 Delete</button>
+          <h2>Manage Products</h2>
+          <div className="product-list">
+            {products.map((product) => (
+              <div
+                key={product._id}
+                className="product-card-list"
+                style={{ backgroundColor: product.bgColor, color: product.textColor }}
+              >
+                <img src={product.image} alt={product.name} />
+                <h3>{product.name}</h3>
+                <p>{product.description}</p>
+                <p>Price: ₹{product.price}</p>
+                <button onClick={() => handleEdit(product)}>✏ Edit</button>
+                <button onClick={() => handleDelete(product._id)}>🗑 Delete</button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
     </div>
   );
 };

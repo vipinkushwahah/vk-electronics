@@ -1,36 +1,87 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import "./homeappliance.scss";
+import SkeletonLoader from "../hooks/skeletonloader/skeletonloader";
+import { Helmet } from "react-helmet-async";
 
 interface Appliance {
-    id: number;
+    _id: string;
     name: string;
     description: string;
     image?: string;
+    textColor?: string;
+    bgColor?: string;
 }
 
-const appliancesList: Appliance[] = [
-    { id: 1, name: "Refrigerator", description: "Energy-efficient refrigerators to keep your food fresh.", image: "❄️" },
-    { id: 2, name: "Washing Machine", description: "Top & front load washing machines with smart features.", image: "🌀" },
-    { id: 3, name: "Microwave", description: "High-tech microwave ovens for quick meals.", image: "🔥" },
-    { id: 4, name: "Air Conditioner", description: "Powerful ACs for summer cooling.", image: "❄️" },
-    { id: 5, name: "Vacuum Cleaner", description: "High suction power for deep cleaning.", image: "🧹" },
-    { id: 6, name: "Water Purifier", description: "RO & UV water purifiers for safe drinking water.", image: "🚰" },
-];
-
 const HomeAppliances: React.FC = () => {
+    const [appliances, setAppliances] = useState<Appliance[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string>("");
+
+    useEffect(() => {
+        fetchAppliances();
+    }, []);
+
+    const fetchAppliances = async () => {
+        try {
+            const response = await axios.get("https://vk-electronics-backend.onrender.com/products/home-appliance");
+            setAppliances(response.data);
+            setLoading(false);
+        } catch (error) {
+            console.error("Error fetching appliances:", error);
+            setError("Failed to load appliances. Please try again.");
+            setLoading(false);
+        }
+    };
+
+    // const handleDelete = async (id: string) => {
+    //     try {
+    //         await axios.delete(`https://vk-electronics-backend.onrender.com/products/${id}`);
+    //         fetchAppliances();
+    //     } catch (error) {
+    //         console.error("Error deleting appliance:", error);
+    //     }
+    // };
+
     return (
         <div className="home-appliances">
+
+            <Helmet>
+                <title>Home Appliances - VK Electronics</title>
+                <meta name="description" content="Shop the latest home appliances at VK Electronics. Get great deals on kitchen and home essentials!" />
+                <meta name="keywords" content="home appliances, kitchen appliances, electronics, best deals, online shopping" />
+                <meta property="og:title" content="Home Appliances - VK Electronics" />
+                <meta property="og:description" content="Explore a wide range of high-quality home appliances at VK Electronics. Shop now!" />
+                <meta property="og:image" content="https://vk-electronics.netlify.app/default-home-appliance-image.jpg" />
+                <meta property="og:url" content="https://vk-electronics.netlify.app/home-appliance" />
+            </Helmet>
+
+
             <h2 className="title">Home Appliances</h2>
-            <p className="subtitle">Click on an appliance to view full details.</p>
-            
+            {loading && <SkeletonLoader variant="gadget" items={6} />}
+            {error && <p className="error">{error}</p>}
+
             <div className="appliance-list">
-                {appliancesList.map((appliance) => (
-                    <Link to={`/appliance/${appliance.id}`} key={appliance.id} className="appliance-card">
-                        <div className="icon">{appliance.image}</div>
+                {appliances.map((appliance) => (
+                    <div
+                        key={appliance._id}
+                        className="appliance-card"
+                        style={{ backgroundColor: appliance.bgColor, color: appliance.textColor }}
+                    >
+
+                        <img src={appliance.image} alt={appliance.name} className="appliance-image" />
                         <div className="appliance-name">{appliance.name}</div>
                         <p className="appliance-description">{appliance.description}</p>
-                    </Link>
+
+                        {appliance._id && <Link to={`/product/${appliance._id}`}>
+                            <button className="add-to-cart-product">See Product Details</button>
+                        </Link>}
+                        {/* <div className="actions">
+                            <button className="edit-button">✏ Edit</button>
+                            <button className="delete-button" onClick={() => handleDelete(appliance._id)}>🗑 Delete</button>
+                        </div> */}
+                    </div>
                 ))}
             </div>
         </div>

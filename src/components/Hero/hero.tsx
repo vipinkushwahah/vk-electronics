@@ -3,16 +3,17 @@ import "./hero.scss";
 import { Button } from "../hooks/Button";
 import RepairServices from "../repairservice/repair";
 import OurProducts from "../ourproducts/ourproduct";
+import { Helmet } from "react-helmet-async"; // Import Helmet
 
 // Slide data
 const slides = [
   {
-    title: "Up to 50% off on all Men's Wear",
+    title: "Up to 50% off on all mobile phones",
     description: "Get the best deals on stylish outfits. Don't miss out!",
     image: "https://img.freepik.com/free-photo/young-woman-trendy-stylish-glasses-bright-orange-oversized-jacket-white-background-holds-phone-with-blank-white-screen_343596-8188.jpg"
   },
   {
-    title: "New Arrivals in Women's Fashion",
+    title: "New Arrivals in home appliances",
     description: "Trendy and stylish outfits now available.",
     image: "https://img.freepik.com/free-photo/smiling-woman-holding-shopping-bags_171337-13172.jpg"
   },
@@ -86,6 +87,17 @@ export const Hero = () => {
 
   return (
     <div>
+
+      <Helmet>
+        <title>Welcome to VK Electronics | Best Deals and Discounts</title>
+        <meta name="description" content="Shop for the best electronics, fashion, and more at VK Electronics. Enjoy up to 60% off on selected items!" />
+        <meta name="keywords" content="VK Electronics, electronics, fashion, gadgets, sale, smartphone, home appliances" />
+        <meta property="og:title" content="Welcome to VK Electronics | Best Deals and Discounts" />
+        <meta property="og:description" content="Explore our latest sales and find great deals on electronics, fashion, and more." />
+        <meta property="og:image" content="https://vk-electronics.netlify.app/default-banner-image.jpg" />
+        <meta property="og:url" content="https://vk-electronics.netlify.app/" />
+      </Helmet>
+
       <section
         className="hero"
         onMouseEnter={() => setIsHovered(true)}
@@ -94,7 +106,7 @@ export const Hero = () => {
         <div className="hero-content">
           <h1>{slides[currentSlide].title}</h1>
           <p>{slides[currentSlide].description}</p>
-          <Button text="Order Now" />
+          <Button text=" View Shop details" />
         </div>
 
         <div className="hero-image-container">

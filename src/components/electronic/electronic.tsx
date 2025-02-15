@@ -1,40 +1,86 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import "./electronic.scss";
+import { Helmet } from "react-helmet-async";
+import SkeletonLoader from "../hooks/skeletonloader/skeletonloader";
 
 interface Gadget {
-    id: number;
+    _id: string;
     name: string;
     description: string;
-    image?: string; // Icon URL or class
+    image?: string;
+    textColor?: string;
+    bgColor?: string;
 }
 
-const gadgetsList: Gadget[] = [
-    { id: 1, name: "Speakers", description: "High-quality sound speakers for an immersive experience.", image: "🔊" },
-    { id: 2, name: "Chargers", description: "Fast chargers for all smartphone models.", image: "🔌" },
-    { id: 3, name: "Earbuds", description: "Wireless earbuds with noise cancellation.", image: "🎧" },
-    { id: 4, name: "Earphones", description: "Wired and wireless earphones with deep bass.", image: "🎤" },
-    { id: 5, name: "Screen Guard", description: "Protect your smartphone screen with durable guards.", image: "📱" },
-    { id: 6, name: "Power Bank", description: "Portable power banks for long-lasting battery life.", image: "🔋" },
-    { id: 7, name: "Mobile Cover", description: "Stylish and protective covers for your smartphones.", image: "📲" },
-    { id: 8, name: "Pendrive", description: "High-speed USB flash drives for storage needs.", image: "💾" },
-    { id: 9, name: "USB Cable", description: "Durable and fast-charging USB cables.", image: "🔗" },
-    { id: 10, name: "Tempered Glass", description: "Scratch-resistant tempered glass for screens.", image: "🛡️" },
-];
-
 const ElectronicGadgets: React.FC = () => {
+    const [gadgets, setGadgets] = useState<Gadget[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string>("");
+
+    useEffect(() => {
+        fetchGadgets();
+    }, []);
+
+    const fetchGadgets = async () => {
+        try {
+            const response = await axios.get("https://vk-electronics-backend.onrender.com/products/electronics");
+            setGadgets(response.data);
+            setLoading(false);
+        } catch (error) {
+            console.error("Error fetching gadgets:", error);
+            setError("Failed to load gadgets. Please try again.");
+            setLoading(false);
+        }
+    };
+
+    // const handleDelete = async (id: string) => {
+    //     try {
+    //         await axios.delete(`https://vk-electronics-backend.onrender.com/products/${id}`);
+    //         fetchGadgets();
+    //     } catch (error) {
+    //         console.error("Error deleting gadget:", error);
+    //     }
+    // };
+
     return (
         <div className="electronic-gadgets">
+             
+             <Helmet>
+                <title>Electronic Gadgets - VK Electronics</title>
+                <meta name="description" content="Browse the latest electronic gadgets at VK Electronics. Shop now for the best deals!" />
+                <meta name="keywords" content="electronics, gadgets, smart devices, online shopping" />
+                <meta property="og:title" content="Electronic Gadgets - VK Electronics" />
+                <meta property="og:description" content="Find the latest electronic gadgets with great discounts at VK Electronics." />
+                <meta property="og:image" content="https://vk-electronics.netlify.app/default-gadget-image.jpg" />
+                <meta property="og:url" content="https://vk-electronics.netlify.app/electronics" />
+            </Helmet>
+
             <h2 className="title">Electronic Gadgets</h2>
-            <p className="subtitle">Click on a gadget to view full details.</p>
-            
+            {loading && <SkeletonLoader variant="gadget" items={6} />}
+            {error && <p className="error">{error}</p>}
+
             <div className="gadget-list">
-                {gadgetsList.map((gadget) => (
-                    <Link to={`/gadget/${gadget.id}`} key={gadget.id} className="gadget-card">
-                        <div className="icon">{gadget.image}</div>
+                {gadgets.map((gadget) => (
+                    <div
+                        key={gadget._id}
+                        className="gadget-card"
+                        style={{ backgroundColor: gadget.bgColor, color: gadget.textColor }}
+                    >
+
+                        <img src={gadget.image} alt={gadget.name} className="gadget-image" />
                         <div className="gadget-name">{gadget.name}</div>
                         <p className="gadget-description">{gadget.description}</p>
-                    </Link>
+
+                        <Link to={`/product/${gadget._id}`}>
+                            <button className="add-to-cart-product">See Product Details</button>
+                        </Link>
+                        {/* <div className="actions">
+                            <button className="edit-button">✏ Edit</button>
+                            <button className="delete-button" onClick={() => handleDelete(gadget._id)}>🗑 Delete</button>
+                        </div> */}
+                    </div>
                 ))}
             </div>
         </div>

@@ -69,6 +69,16 @@
     }
   }
 
-
-  
+  @media (max-width: 430px) {
+  .search-results{
+    position: absolute;
+    top: 106px;
+    right: -74px;
+    width: 272px;
+    background: #646262;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    line-height: 30px;
+  }
+  }
   

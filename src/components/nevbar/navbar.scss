@@ -65,7 +65,7 @@
   flex-direction: column;
   align-items: center;
   padding-top: 2rem;
-  z-index: 1000;
+  z-index: 100000000;
 
   .nav-links {
     list-style: none;
@@ -137,6 +137,7 @@
   .subnav-links{
     gap: 10px !important;
     padding: 6px 0px;
+    font-family: 'Times New Roman', Times, serif !important;
   }
 }
   .logo {
@@ -146,8 +147,8 @@
     padding: 5px 10px;
     position: fixed;
     top: 0px;
-    left: 8px;
-    right: 8px;
+    left: 0px;
+    right: 0px;
     z-index: 1000;
   }
   .product-service {
@@ -160,4 +161,16 @@
       font-size: 1rem !important;
     }
 }
+}
+/* Remove underline from links */
+.nav-links a,
+.subnav-links a {
+    text-decoration: none;
+    color: inherit; /* Optional: Ensures it matches the surrounding text color */
+}
+
+/* Optional: Add hover effect */
+.nav-links a:hover,
+.subnav-links a:hover {
+    color: #007bff; /* Change color on hover (customize as needed) */
 }

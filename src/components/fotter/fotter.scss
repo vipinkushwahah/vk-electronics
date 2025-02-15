@@ -1,7 +1,19 @@
+:root {
+    --footer-bg: #1f1f1f;           /* Dark background for footer */
+    --footer-text-color: #f4f4f4;    /* Light color for text */
+    --footer-link-color: #b0c4de;    /* Lighter blue for links */
+    --footer-link-hover-color: #007bff;  /* Brighter blue for hover */
+    --social-icon-color: #bbb;       /* Light gray for social icons */
+    --social-icon-hover-color: #007bff; /* Blue hover for social icons */
+    --footer-border-color: #333;     /* Dark border for separation */
+    --footer-bottom-bg: #181818;     /* Slightly darker background for footer bottom */
+    --footer-bottom-text-color: #bbb; /* Subtle text color for footer bottom */
+}
+
 .footer {
-    background: #222;
-    color: #fff;
-    padding: 40px 20px;
+    background: var(--footer-bg);
+    color: var(--footer-text-color);
+    padding: -2px 20px;
     text-align: center;
 
     .container {
@@ -11,69 +23,103 @@
 
     .footer-content {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        padding-bottom: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        // gap: 30px;
     }
 
     .footer-logo h2 {
-        font-size: 24px;
+        font-size: 28px;
         font-weight: bold;
+        color: #fff;
+        margin-bottom: 10px;
     }
 
-    .footer-links,
-    .footer-contact,
-    .footer-social {
-        h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
+    .footer-logo p {
+        font-size: 16px;
+        color: #bbb;
+    }
 
-        ul {
-            list-style: none;
-            padding: 0;
+    .footer-links-container {
+        display: flex;
+        // justify-content: space-between;
+        flex-wrap: wrap;
+        // gap: 30px;
+        width: 100%;
 
-            li {
-                margin-bottom: 5px;
+        .footer-links {
+            width: 40%;
+            h3 {
+                font-size: 20px;
+                color: #fff;
+                margin-bottom: 20px;
             }
 
-            a {
-                text-decoration: none;
-                color: #bbb;
-                transition: 0.3s;
+            ul {
+                list-style: none;
+                padding: 0;
 
-                &:hover {
-                    color: #007bff;
+                li {
+                    margin-bottom: 30px;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: var(--footer-link-color);
+                    font-size: 16px;
+                    transition: color 0.3s ease;
+
+                    &:hover {
+                        color: var(--footer-link-hover-color);
+                    }
                 }
             }
         }
 
-        p {
-            font-size: 14px;
-            color: #bbb;
+        .footer-contact {
+            width: 50%;
+            h3 {
+                font-size: 20px;
+                color: #fff;
+                margin-bottom: 20px;
+            }
+
+            p {
+                font-size: 14px;
+                color: #bbb;
+                margin-bottom: 10px;
+            }
         }
     }
 
-    .social-icons {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        font-size: 24px;
+    .footer-social {
+        h3 {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
 
-        a {
-            color: #bbb;
-            transition: 0.3s;
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 28px;
 
-            &:hover {
-                color: #007bff;
+            a {
+                color: var(--social-icon-color);
+                transition: color 0.3s ease;
+
+                &:hover {
+                    color: var(--social-icon-hover-color);
+                }
             }
         }
     }
 
     .footer-bottom {
-        border-top: 1px solid #444;
-        padding-top: 15px;
+        background-color: var(--footer-bottom-bg);
+        border-top: 1px solid var(--footer-border-color);
+        padding: 15px 0;
         font-size: 14px;
-        color: #bbb;
+        color: var(--footer-bottom-text-color);
     }
 }
