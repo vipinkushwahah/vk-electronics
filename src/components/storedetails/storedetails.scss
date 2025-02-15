@@ -68,7 +68,9 @@
   
   @media (max-width: 600px) {
     .store-modal-content {
-      width: 95%;
+        width: 80%;
+        height: 68vh;
+        overflow-y: scroll;
     }
   }
   

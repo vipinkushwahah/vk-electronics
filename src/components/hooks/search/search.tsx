@@ -69,19 +69,22 @@ const SearchBar = () => {
   };
 
   const handleProductSelect = (product: Product) => {
-    let route = "/";
+    // Remove the route variable as it's not needed
     if (product.category === "Smartphone") {
-      route = "/smartphone";
+      // route = "/smartphone"; // This is unnecessary now
     } else if (product.category === "home-appliance") {
-      route = "/home-appliance";
+      // route = "/home-appliance"; // This is unnecessary now
     } else if (product.category === "Electronics") {
-      route = "/electronics";
+      // route = "/electronics"; // This is unnecessary now
     }
-    navigate(`/product/${product._id}`); // Navigate directly to product details
+  
+    // Navigate directly to product details
+    navigate(`/product/${product._id}`);
     setIsOpen(false);
     setSearchQuery("");
     setFilteredProducts([]);
   };
+  
 
   return (
     <div

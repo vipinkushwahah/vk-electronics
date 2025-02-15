@@ -1,5 +1,6 @@
 import React from "react";
 import "./storedetails.scss";
+import pic from "../qrcode/Screenshot 2025-02-15 at 8.09.28 PM.png"
 
 interface StoreDetailsProps {
   isOpen: boolean;
@@ -17,12 +18,13 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ isOpen, onClose }) => {
         
         <div className="store-info">
           <img 
-            src="https://source.unsplash.com/500x300/?electronics,shop" 
+            src={pic}
             alt="Store Front" 
             className="store-image"
           />
           
           <div className="store-details">
+            <p><strong>📞 Contact:</strong> +91 7420 8683 46</p>
             <p><strong>📍 Address:</strong> Bangra Bazar, Lohari Bari, Bhatpar Rani, Deoria, Uttar Pradesh, India</p>
             <p><strong>📮 Pin Code:</strong> 274704</p>
           </div>
