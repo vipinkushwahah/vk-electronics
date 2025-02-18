@@ -8,7 +8,8 @@ interface Product {
     _id: string;
     title: string;
     description: string;
-    image: string;
+    image?: string; // URL image
+    images?: Array<{ data: string }>; // Base64 encoded image(s)
     price: number;
     mrp: number;
     discount: number;
@@ -35,7 +36,7 @@ const ProductList: React.FC = () => {
                 _id: product._id,
                 title: product.name,
                 description: product.description,
-                image: product.image,
+                image: product.image || product.images?.[0]?.data || "",  // Ensure the image source is handled correctly
                 price: product.price,
                 mrp: product.mrp || product.price,
                 discount: product.discount || 0,
@@ -66,29 +67,25 @@ const ProductList: React.FC = () => {
 
     return (
         <div>
-
-            <Helmet>
-                <title>Smartphones - VK Electronics</title>
-                <meta name="description" content="Browse and shop the latest smartphones at VK Electronics. Get amazing deals and discounts on top mobile brands!" />
-                <meta name="keywords" content="smartphones, mobile phones, electronics, VK Electronics, buy smartphones" />
-                <meta property="og:title" content="Smartphones - VK Electronics" />
-                <meta property="og:description" content="Explore a wide range of smartphones at VK Electronics with great offers." />
-                <meta property="og:image" content="https://vk-electronics.netlify.app/default-smartphone-image.jpg" />
-                <meta property="og:url" content="https://vk-electronics.netlify.app/smartphone" />
-            </Helmet>
-
             <h2 className="product-container">Mobile Phones</h2>
 
             {loading && <SkeletonLoader variant="product" items={6} />}
             {error && <p className="error">{error}</p>}
 
             <div className="product-list">
-                {products.map((product) => (
-                    <ProductCard key={product._id} product={product} onDelete={handleDelete} />
-                ))}
+                {products.map((product) => {
+                    return (
+                        <ProductCard
+                            key={product._id}
+                            product={product}
+                            onDelete={handleDelete}
+                        />
+                    );
+                })}
             </div>
         </div>
     );
 };
+
 
 export default ProductList;

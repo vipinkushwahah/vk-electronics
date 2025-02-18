@@ -9,7 +9,11 @@ interface Appliance {
     _id: string;
     name: string;
     description: string;
-    image?: string;
+    image?: string; // URL image
+    images?: Array<{ data: string }>; // Base64 encoded image(s)
+    price: number;
+    mrp: number;
+    discount: number;
     textColor?: string;
     bgColor?: string;
 }
@@ -35,18 +39,8 @@ const HomeAppliances: React.FC = () => {
         }
     };
 
-    // const handleDelete = async (id: string) => {
-    //     try {
-    //         await axios.delete(`https://vk-electronics-backend.onrender.com/products/${id}`);
-    //         fetchAppliances();
-    //     } catch (error) {
-    //         console.error("Error deleting appliance:", error);
-    //     }
-    // };
-
     return (
         <div className="home-appliances">
-
             <Helmet>
                 <title>Home Appliances - VK Electronics</title>
                 <meta name="description" content="Shop the latest home appliances at VK Electronics. Get great deals on kitchen and home essentials!" />
@@ -57,32 +51,38 @@ const HomeAppliances: React.FC = () => {
                 <meta property="og:url" content="https://vk-electronics.netlify.app/home-appliance" />
             </Helmet>
 
-
             <h2 className="title">Home Appliances</h2>
             {loading && <SkeletonLoader variant="gadget" items={6} />}
             {error && <p className="error">{error}</p>}
 
             <div className="appliance-list">
-                {appliances.map((appliance) => (
-                    <div
-                        key={appliance._id}
-                        className="appliance-card"
-                        style={{ backgroundColor: appliance.bgColor, color: appliance.textColor }}
-                    >
+                {appliances.map((appliance) => {
+                    // Determine image source
+                    const imageSrc = appliance.image || (appliance.images && appliance.images[0]?.data) || "";
 
-                        <img src={appliance.image} alt={appliance.name} className="appliance-image" />
-                        <div className="appliance-name">{appliance.name}</div>
-                        <p className="appliance-description">{appliance.description}</p>
-
-                        {appliance._id && <Link to={`/product/${appliance._id}`}>
-                            <button className="add-to-cart-product">See Product Details</button>
-                        </Link>}
-                        {/* <div className="actions">
-                            <button className="edit-button">✏ Edit</button>
-                            <button className="delete-button" onClick={() => handleDelete(appliance._id)}>🗑 Delete</button>
-                        </div> */}
-                    </div>
-                ))}
+                    return (
+                        <div
+                            key={appliance._id}
+                            className="appliance-card"
+                            style={{ backgroundColor: appliance.bgColor, color: appliance.textColor }}
+                        >
+                            {imageSrc ? (
+                                <img src={imageSrc} alt={appliance.name} className="appliance-image" />
+                            ) : (
+                                <div className="no-image">No image available</div>
+                            )}
+                            <div className="appliance-name">{appliance.name}</div>
+                            <p className="appliance-description">{appliance.description}</p>
+                            <div className=" appliance-price">
+                            ₹{appliance.price} <span className="appliance-mrp">M.R.P: ₹{appliance.mrp}</span>
+                            <span className="appliance-discount">({appliance.discount}% off)</span>
+                            </div>
+                            <Link to={`/product/${appliance._id}`}>
+                                <button className="add-to-cart-product">See Product Details</button>
+                            </Link>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

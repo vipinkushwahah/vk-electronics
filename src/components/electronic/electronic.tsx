@@ -9,7 +9,8 @@ interface Gadget {
     _id: string;
     name: string;
     description: string;
-    image?: string;
+    image?: string; // URL image
+    images?: Array<{ data: string }>; // Base64 encoded image(s)
     textColor?: string;
     bgColor?: string;
 }
@@ -35,19 +36,9 @@ const ElectronicGadgets: React.FC = () => {
         }
     };
 
-    // const handleDelete = async (id: string) => {
-    //     try {
-    //         await axios.delete(`https://vk-electronics-backend.onrender.com/products/${id}`);
-    //         fetchGadgets();
-    //     } catch (error) {
-    //         console.error("Error deleting gadget:", error);
-    //     }
-    // };
-
     return (
         <div className="electronic-gadgets">
-             
-             <Helmet>
+            <Helmet>
                 <title>Electronic Gadgets - VK Electronics</title>
                 <meta name="description" content="Browse the latest electronic gadgets at VK Electronics. Shop now for the best deals!" />
                 <meta name="keywords" content="electronics, gadgets, smart devices, online shopping" />
@@ -62,26 +53,30 @@ const ElectronicGadgets: React.FC = () => {
             {error && <p className="error">{error}</p>}
 
             <div className="gadget-list">
-                {gadgets.map((gadget) => (
-                    <div
-                        key={gadget._id}
-                        className="gadget-card"
-                        style={{ backgroundColor: gadget.bgColor, color: gadget.textColor }}
-                    >
+                {gadgets.map((gadget) => {
+                    // Determine image source
+                    const imageSrc = gadget.image || (gadget.images && gadget.images[0]?.data) || "";
 
-                        <img src={gadget.image} alt={gadget.name} className="gadget-image" />
-                        <div className="gadget-name">{gadget.name}</div>
-                        <p className="gadget-description">{gadget.description}</p>
+                    return (
+                        <div
+                            key={gadget._id}
+                            className="gadget-card"
+                            style={{ backgroundColor: gadget.bgColor, color: gadget.textColor }}
+                        >
+                            {imageSrc ? (
+                                <img src={imageSrc} alt={gadget.name} className="gadget-image" />
+                            ) : (
+                                <div className="no-image">No image available</div>
+                            )}
+                            <div className="gadget-name">{gadget.name}</div>
+                            <p className="gadget-description">{gadget.description}</p>
 
-                        <Link to={`/product/${gadget._id}`}>
-                            <button className="add-to-cart-product">See Product Details</button>
-                        </Link>
-                        {/* <div className="actions">
-                            <button className="edit-button">✏ Edit</button>
-                            <button className="delete-button" onClick={() => handleDelete(gadget._id)}>🗑 Delete</button>
-                        </div> */}
-                    </div>
-                ))}
+                            <Link to={`/product/${gadget._id}`}>
+                                <button className="add-to-cart-product">See Product Details</button>
+                            </Link>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

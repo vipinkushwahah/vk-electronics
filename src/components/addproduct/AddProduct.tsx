@@ -2,14 +2,29 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./addProduct.scss"; // Optional styling
 
+interface Product {
+  name: string;
+  description: string;
+  price: string;
+  images: File[];  // Explicitly set images as File[] type
+  textColor: string;
+  bgColor: string;
+  mrp: string;
+  discount: string;
+  title: string;
+  bankname: string;
+  bankOffer: string;
+  category: string;
+}
+
 const AddProduct: React.FC = () => {
-  const [product, setProduct] = useState({
+  const [product, setProduct] = useState<Product>({
     name: "",
     description: "",
     price: "",
-    image: "",
-    textColor: "",
-    bgColor: "",
+    images: [], // This is now explicitly a File[] array
+    textColor: "#000000",
+    bgColor: "#ffffff",
     mrp: "",
     discount: "",
     title: "",
@@ -20,6 +35,7 @@ const AddProduct: React.FC = () => {
 
   const [password, setPassword] = useState(""); // State to store password input
   const [isAuthorized, setIsAuthorized] = useState(false); // State to manage authorization status
+  const [isLoading, setIsLoading] = useState(false); // State for loading status
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -39,16 +55,45 @@ const AddProduct: React.FC = () => {
     }
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      setProduct({ ...product, images: Array.from(files) });  // This will now accept File[] because the state is typed properly
+    }
+  };
+
+  const handleImageRemove = (index: number) => {
+    const updatedImages = product.images.filter((_, i) => i !== index);
+    setProduct({ ...product, images: updatedImages });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading
+
+    const formData = new FormData();
+    // Append product data to FormData
+    for (const key in product) {
+      if (key !== "images") {
+        formData.append(key, product[key as keyof Product] as string); // Type-safe access to product fields
+      }
+    }
+
+    // Append images to FormData
+    product.images.forEach((image) => {
+      formData.append("images", image);
+    });
+
     try {
-      await axios.post("https://vk-electronics-backend.onrender.com/products", product);
+      await axios.post("https://vk-electronics-backend.onrender.com/products", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       alert("✅ Product Added Successfully!");
       setProduct({
         name: "",
         description: "",
         price: "",
-        image: "",
+        images: [],
         textColor: "#000000",
         bgColor: "#ffffff",
         mrp: "",
@@ -61,6 +106,8 @@ const AddProduct: React.FC = () => {
     } catch (error) {
       console.error("Error adding product:", error);
       alert("❌ Failed to add product!");
+    } finally {
+      setIsLoading(false); // Stop loading after the process
     }
   };
 
@@ -87,7 +134,35 @@ const AddProduct: React.FC = () => {
             <input type="text" name="name" placeholder="Product Name" value={product.name} onChange={handleChange} required />
             <textarea name="description" placeholder="Description" value={product.description} onChange={handleChange} required />
             <input type="text" name="price" placeholder="Price (₹)" value={product.price} onChange={handleChange} required />
-            <input type="text" name="image" placeholder="Image URL" value={product.image} onChange={handleChange} />
+            <input
+              type="file"
+              name="images"
+              multiple
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+            
+            {/* Image Preview */}
+            {product.images.length > 0 && (
+              <div className="image-preview">
+                <h3>Image Preview:</h3>
+                <div className="preview-images">
+                  {product.images.map((image, index) => (
+                    <div key={index} className="preview-image">
+                      <img
+                        src={URL.createObjectURL(image)}
+                        alt={`Image ${index + 1}`}
+                        className="image-thumb"
+                      />
+                      <button type="button" onClick={() => handleImageRemove(index)} className="remove-image">
+                        Remove
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <input type="text" name="title" placeholder="Product Title" value={product.title} onChange={handleChange} />
             <input type="text" name="textColor" placeholder="Text Color (Hex)" value={product.textColor} onChange={handleChange} />
             <input type="text" name="bgColor" placeholder="Background Color (Hex)" value={product.bgColor} onChange={handleChange} />
@@ -103,7 +178,13 @@ const AddProduct: React.FC = () => {
               <option value="home-appliance">Home Appliance</option>
             </select>
 
-            <button type="submit">Add Product</button>
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? (
+                <div className="loader"></div> // Circular loader
+              ) : (
+                "Add Product"
+              )}
+            </button>
           </form>
         </div>
       )}

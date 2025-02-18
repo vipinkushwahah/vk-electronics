@@ -15,11 +15,12 @@
     color: var(--footer-text-color);
     padding: -2px 20px;
     text-align: center;
+    margin-top: 10px;
 
-    .container {
-        max-width: 1200px;
-        margin: auto;
-    }
+    // .container {
+    //     max-width: 1200px;
+    //     margin: auto;
+    // }
 
     .footer-content {
         display: grid;

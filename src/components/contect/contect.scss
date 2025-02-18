@@ -156,7 +156,7 @@ body {
         padding: 10px 0px 0px 10px;
     }
     .contact-form {
-        width: 335px !important;
+        width: 384px !important;
         padding: unset !important;
     }
     .contact-container {
@@ -206,9 +206,16 @@ body {
   }
   
   .contact-map {
-    margin: 20px 50px 10px 50px;
+    margin: 20px 22px 10px 22px;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .main_image {
+    width: 96%;
+    height: 100%;
+    object-fit: cover;
+    margin: 8px;
+    border-radius: 35px;
   }
   

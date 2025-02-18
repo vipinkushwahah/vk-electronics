@@ -1,81 +1,187 @@
-.back-button{
-    font-size: 32px;
+.product-details-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin: 10px auto;
+  max-width: 500px; // Responsive width
+
+  .back-button {
+    font-size: 24px;
     margin: 15px;
-    text-align: center;
     border-radius: 13px;
-  }
-  
-  .product-details-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    margin: 10px auto;
-  
-    .product-image {
-      width: 90%;
-      max-width: 400px;
-      border-radius: 8px;
+    padding: 8px 15px;
+    background: #f1f1f1;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transform: translate(385px, -30px);
+
+    &:hover {
+      background: #ddd;
     }
-  
-    .details {
-      // text-align: center;
-      padding: 15px;
-      border-top: 1px solid black;
-      margin-top: 10px;
-      width: 200px;
-  
-      .product-title {
-        font-size: 24px;
-        font-weight: bold;
-        margin: 10px 0;
-      }
-  
+  }
+
+  .product-image {
+    width: 86%;
+    max-width: 400px;
+    border-radius: 8px;
+    margin-left: 26px;
+    text-align: center;
+  }
+
+  .details {
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid black;
+    margin-top: 10px;
+    width: 100%;
+
+    .product-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .description {
+      font-size: 16px;
+      margin: 10px 0;
+      color: #555;
+    }
+
+    .price {
+      font-size: 36px;
+      // font-weight: bold;
+      color: #e31907;
+      text-align: left;
+
       .discount {
-        font-size: 20px;
-        color: rgb(7, 7, 7);
+        // font-size: 20px;
+        color: #111;
         font-weight: bold;
       }
-  
-      .description {
-        font-size: 16px;
-        margin: 10px 0;
-      }
-  
-      .price {
-        font-size: 26px;
-        font-weight: bold;
-        color: #e31907;
-      }
-  
-      .product-mrp {
-        color: gray;
-        font-weight: bold;
-        font-size: 15px;
-      }
-  
+    }
+
+    .product-mrp {
+      color: gray;
+      font-weight: bold;
+      font-size: 15px;
+      text-align: left;
+      
       .mrp-underline {
         text-decoration: line-through;
       }
-  
-      .bank-offer {
-        font-size: 22px;
-        color: #040303a9;
-        font-weight: bold;
-      }
-  
-      .buy-now {
-        background: #ff9800;
-        border: none;
-        padding: 10px;
-        font-weight: bold;
-        cursor: pointer;
-        margin-top: 15px;
-        border-radius: 5px;
-  
-        &:hover {
-          background: #f57c00;
-        }
+    }
+
+    .bank-offer {
+      font-size: 22px;
+      color: #040303a9;
+      text-align: left;
+    }
+
+    .buy-now {
+      background: #ff9800;
+      border: none;
+      padding: 18px 52px;
+      font-weight: bold;
+      cursor: pointer;
+      // margin-top: 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      color: white;
+
+      &:hover {
+        background: #f57c00;
       }
     }
   }
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .product-details-page {
+    max-width: 800px;
+  }
+  .prev-button, .next-button {
+    top: 53% !important;
+  }
+  
+  .prev-button {
+    left: 240px !important; /* Position it outside the left edge */
+  }
+  
+  .next-button {
+    right: 240px !important; /* Position it outside the right edge */
+  }
+}
+
+.product-image-container {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
+.image-dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #717171;
+}
+
+.dot:hover {
+  background-color: #555;
+}
+
+/* Slideshow Navigation Buttons outside the image */
+.prev-button, .next-button {
+  position: absolute;
+  top: 44%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.prev-button {
+  left: 0px; /* Position it outside the left edge */
+  margin-right: 4px;
+}
+
+.next-button {
+  right: 0px; /* Position it outside the right edge */
+  margin-left: 4px;
+}
+
+.prev-button:hover, .next-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.no-image {
+  text-align: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  color: #888;
+}
+

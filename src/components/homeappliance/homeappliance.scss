@@ -23,6 +23,21 @@
         align-items: center;
     }
 
+    .appliance-image {
+        width: 300px !important;
+        // height: 340px !important;
+        object-fit: cover !important;
+        margin-bottom: 10px;
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: 0.3s ease-in-out;
+        text-decoration: none;
+        color: black;
+    }
+
     .appliance-card {
         background: white;
         padding: 15px;
@@ -52,5 +67,31 @@
             font-size: 14px;
             color: #555;
         }
+    }
+}
+
+@media (min-width: 430px) {
+    .home-appliances .appliance-card{
+        width: 300px !important;
+    }
+
+}
+
+.appliance-price {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 5px 0;
+
+    .appliance-mrp {
+        text-decoration: line-through;
+        color: gray;
+        margin-left: 5px;
+        font-size: 12px;
+    }
+
+    .appliance-discount {
+        color: rgb(250, 109, 1);
+        font-weight: bold;
+        font-size: 10px;
     }
 }

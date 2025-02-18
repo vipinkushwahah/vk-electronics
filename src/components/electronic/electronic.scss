@@ -16,11 +16,12 @@
     }
 
     .gadget-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        display: flex !important;
         gap: 15px;
-        justify-content: center;
-        align-items: center;
+        justify-content: center !important;
+        align-items: center !important;
+        margin: 0px 8px 10px 8px;
+        flex-wrap: wrap;
     }
 
     .gadget-card {
@@ -32,6 +33,7 @@
         transition: 0.3s ease-in-out;
         text-decoration: none;
         color: black;
+        width: 350px;
 
         &:hover {
             transform: scale(1.05);
@@ -54,6 +56,7 @@
         }
     }
 }
+
 .add-to-cart-product {
     background: #ffd814;
     border: none;
@@ -67,4 +70,30 @@
     &:hover {
         background: #f7ca00;
     }
+}
+
+@media (min-width: 430px) {
+    .electronic-gadgets .gadget-card {
+        width: 286px !important;
+    }
+    .gadget-list {
+        gap: 70px !important;
+        margin: 0px 8px 10px 8px !important;
+    }
+
+}
+
+.gadget-image {
+    width: 250px !important;
+    height: 340px !important;
+    object-fit: cover !important;
+    margin-bottom: 10px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: 0.3s ease-in-out;
+    text-decoration: none;
+    color: black;
 }

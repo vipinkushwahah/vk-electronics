@@ -44,13 +44,13 @@ const Contact = () => {
 
     return (
         <div>
-            <div>
+            {/* <div>
                 <img
                     className="main_image"
-                    src=""
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROZFxEkjwIgxtTTOk0VHqYiQASQJR44y5LTg&s"
                     alt="main"
                 />
-            </div>
+            </div> */}
             <div className="contact-container">
                 {isSubmitted ? (
                     <div className="contact-thankyou">
