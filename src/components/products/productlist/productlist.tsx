@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../product";
 import axios from "axios";
 import SkeletonLoader from "../../hooks/skeletonloader/skeletonloader";
-import { Helmet } from "react-helmet-async"; // Import Helmet
 
 interface Product {
     _id: string;
