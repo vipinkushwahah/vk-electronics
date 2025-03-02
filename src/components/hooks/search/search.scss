@@ -68,7 +68,19 @@
       }
     }
   }
-
+  .search-results{
+    position: absolute;
+    top: 30px;
+    right: -48px;
+    width: 340px;
+    background: #646262;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    line-height: 30px;
+    z-index: 10;
+    padding: 16px 16px 16px 36px;
+  }
+  
   @media (max-width: 430px) {
   .search-results{
     position: absolute;

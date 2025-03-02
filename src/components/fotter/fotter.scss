@@ -1,13 +1,22 @@
 :root {
-    --footer-bg: #1f1f1f;           /* Dark background for footer */
-    --footer-text-color: #f4f4f4;    /* Light color for text */
-    --footer-link-color: #b0c4de;    /* Lighter blue for links */
-    --footer-link-hover-color: #007bff;  /* Brighter blue for hover */
-    --social-icon-color: #bbb;       /* Light gray for social icons */
-    --social-icon-hover-color: #007bff; /* Blue hover for social icons */
-    --footer-border-color: #333;     /* Dark border for separation */
-    --footer-bottom-bg: #181818;     /* Slightly darker background for footer bottom */
-    --footer-bottom-text-color: #bbb; /* Subtle text color for footer bottom */
+    --footer-bg: #1f1f1f;
+    /* Dark background for footer */
+    --footer-text-color: #f4f4f4;
+    /* Light color for text */
+    --footer-link-color: #b0c4de;
+    /* Lighter blue for links */
+    --footer-link-hover-color: #007bff;
+    /* Brighter blue for hover */
+    --social-icon-color: #bbb;
+    /* Light gray for social icons */
+    --social-icon-hover-color: #007bff;
+    /* Blue hover for social icons */
+    --footer-border-color: #333;
+    /* Dark border for separation */
+    --footer-bottom-bg: #181818;
+    /* Slightly darker background for footer bottom */
+    --footer-bottom-text-color: #bbb;
+    /* Subtle text color for footer bottom */
 }
 
 .footer {
@@ -16,11 +25,6 @@
     padding: -2px 20px;
     text-align: center;
     margin-top: 10px;
-
-    // .container {
-    //     max-width: 1200px;
-    //     margin: auto;
-    // }
 
     .footer-content {
         display: grid;
@@ -49,6 +53,7 @@
 
         .footer-links {
             width: 40%;
+
             h3 {
                 font-size: 20px;
                 color: #fff;
@@ -78,6 +83,7 @@
 
         .footer-contact {
             width: 50%;
+
             h3 {
                 font-size: 20px;
                 color: #fff;
@@ -93,6 +99,20 @@
     }
 
     .footer-social {
+
+        .footer-social-container {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .black {
+            color: #1f1f1f;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+            /* Slight shadow for better text visibility */
+            filter: brightness(1.2);
+        }
+
         h3 {
             font-size: 20px;
             color: #fff;

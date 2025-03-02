@@ -10,6 +10,7 @@ interface Product {
   title: string;
   name: string;
   description: string;
+  image?: string; // URL image
   images?: Array<{ data: string }>; // Base64 encoded image(s)
   price: number;
   mrp: number;
@@ -53,10 +54,11 @@ const ProductDetails: React.FC = () => {
   if (!product) return <h2>Product Not Found</h2>;
 
   // Get the image URLs or base64 data from the product images array
-  const productImages = product.images && product.images.length > 0 ? product.images.map(img => img.data) : ["/default-image.jpg"];
+  const productImages = product.images && product.images.length > 0 ? product.images.map(img => img.data) : [ product.image ||"/default-image.jpg"];
 
   return (
     <div className="product-details-page" style={{ backgroundColor: product.bgColor, color: product.textColor }}>
+      <div className="page-title">Product Details</div>
       <Link to="/" className="back-button"><i className="ri-home-9-fill"></i></Link>
 
       {/* Slideshow for product images */}

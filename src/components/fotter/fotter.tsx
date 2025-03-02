@@ -9,12 +9,12 @@ const Footer: React.FC = () => {
             <div className="container">
                 <div className="footer-content">
                     <div className="footer-logo">
-                        <h2>VK Electronics</h2>
+                        <div>VK Electronics</div>
                         <p>Your One-Stop Shop for Electronics & Repairs.</p>
                     </div>
                     <div className="footer-links-container">
                         <div className="footer-links">
-                            <h3>Quick Links</h3>
+                            <div>Quick Links</div>
                             <ul>
                                 <li><Link to="/">Home</Link></li>
                                 <li><Link to="/smartphone">Smartphone</Link></li>
@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
                         </div>
 
                         <div className="footer-contact">
-                            <h3>Contact Us</h3>
+                            <div>Contact Us</div>
                             <p>Email: support@vkelectronics.com</p>
                             <p>Phone: +91 98765 43210</p>
                             <p>Address: Bangra Bazar, Lohari Bari, Bhatpar Rani, Deoria, Uttar Pradesh, India</p>
@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
                         </div>
                     </div>
                     <div className="footer-social">
-                        <h3>Follow Us</h3>
+                        <div>Follow Us</div>
                         <div className="social-icons">
                             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
                             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>

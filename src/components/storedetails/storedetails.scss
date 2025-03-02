@@ -13,12 +13,14 @@
   .store-modal-content {
     background: white;
     width: 90%;
-    max-width: 500px;
+    max-width: 670px;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     text-align: center;
     position: relative;
+    overflow-y: scroll;
+    height: 710px;
   }
   
   .close-button {

@@ -69,13 +69,13 @@ const SearchBar = () => {
   };
 
   const handleProductSelect = (product: Product) => {
-    // Remove the route variable as it's not needed
+    
     if (product.category === "Smartphone") {
-      // route = "/smartphone"; // This is unnecessary now
+      
     } else if (product.category === "home-appliance") {
-      // route = "/home-appliance"; // This is unnecessary now
+     
     } else if (product.category === "Electronics") {
-      // route = "/electronics"; // This is unnecessary now
+      
     }
   
     // Navigate directly to product details

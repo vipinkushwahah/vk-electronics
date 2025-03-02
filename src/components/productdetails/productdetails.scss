@@ -2,9 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  margin: 10px auto;
+  padding: 0px 20px 20px 20px;
+  margin: 0px auto;
   max-width: 500px; // Responsive width
+
+  .page-title{
+    font-size: 24px;
+    font-weight: bold;
+    transform: translateY(25px);
+  }
 
   .back-button {
     font-size: 24px;
@@ -15,7 +21,7 @@
     text-decoration: none;
     color: #333;
     font-weight: bold;
-    transform: translate(385px, -30px);
+    transform: translate(170px, -25px);
 
     &:hover {
       background: #ddd;
@@ -100,7 +106,7 @@
 /* Responsive Design */
 @media (min-width: 768px) {
   .product-details-page {
-    max-width: 800px;
+    max-width: 100%;
   }
   .prev-button, .next-button {
     top: 53% !important;
@@ -112,6 +118,12 @@
   
   .next-button {
     right: 240px !important; /* Position it outside the right edge */
+  }
+  .back-button {
+    transform: translate(385px, -30px) !important;
+  }
+  .price,.product-mrp,.bank-offer {
+    text-align: center !important;
   }
 }
 
@@ -155,7 +167,7 @@
 .prev-button, .next-button {
   position: absolute;
   top: 44%;
-  z-index: 10;
+  // z-index: 10;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;

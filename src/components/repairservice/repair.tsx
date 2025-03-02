@@ -1,5 +1,6 @@
 import React from "react";
 import "./repair.scss";
+import { useNavigate } from "react-router-dom";
 
 interface RepairService {
     id: number;
@@ -34,6 +35,10 @@ const repairServices: RepairService[] = [
 ];
 
 const RepairServices: React.FC = () => {
+    const navigate = useNavigate();
+    const handleAddReview = () => {
+        navigate("/reviews"); // ✅ Navigate to reviews page
+    };
     return (
         <div className="repair-services">
             <h2 className="title">Our Repair Services</h2>
@@ -53,6 +58,9 @@ const RepairServices: React.FC = () => {
                     </div>
                 ))}
             </div>
+            <button className="add-review-btn" onClick={handleAddReview}>
+                Add Review
+            </button>
         </div>
     );
 };
