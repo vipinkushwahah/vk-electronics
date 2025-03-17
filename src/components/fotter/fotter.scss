@@ -144,3 +144,18 @@
         color: var(--footer-bottom-text-color);
     }
 }
+
+.container-heading{
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+@media screen and (max-width: 768px) {
+    .container-heading{
+        margin-top: unset !important;
+    }
+    .footer-logo{
+        margin-top: 20px;
+    }
+}

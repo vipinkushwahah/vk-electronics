@@ -1,32 +1,28 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+import { useRecoilState } from "recoil";
 import axios from "axios";
+import { authState } from "../LoginSignup/state";
 import "./LoginSignup.scss";
-import logo from '../../assets/vklogo.png';
+import logo from "../../assets/vklogo.png";
+// import UserManagement from "./UserManagement/UserManagement";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-const LoginSignup: React.FC<{
-    onLogin: (userId: string, username: string, isShopkeeper: boolean) => void;
-}> = ({ onLogin }) => {
-    const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [isSignup, setIsSignup] = useState(false);
-    const [isForgotPassword, setIsForgotPassword] = useState(false);
-    const [newPassword, setNewPassword] = useState(""); // For reset password
-    const [errorMessage, setErrorMessage] = useState("");  // To display error messages
-    const [loading, setLoading] = useState(false);
+const LoginSignup: React.FC<{ onLogin: (userId: string, username: string, isShopkeeper: boolean) => void; }> = ({ onLogin }) => {
+    const [auth, setAuth] = useRecoilState(authState);
+    // const [isShopkeeper, setIsShopkeeper] = useState(false);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  // Email regex
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setAuth((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true);
+        setAuth((prev) => ({ ...prev, loading: true, errorMessage: "" }));
 
-        // Validate email using the regex
-        if (!emailRegex.test(email)) {
-            setErrorMessage("Invalid email format");
-            setLoading(false);
+        if (!emailRegex.test(auth.email)) {
+            setAuth((prev) => ({ ...prev, errorMessage: "Invalid email format", loading: false }));
             return;
         }
 
@@ -34,29 +30,35 @@ const LoginSignup: React.FC<{
             let url = "";
             let payload = {};
 
-            if (isForgotPassword) {
-                // Reset password request
-                if (!newPassword) {
-                    setErrorMessage("New password is required");
-                    setLoading(false);
+            if (auth.authView === "forgotPassword") {
+                if (!auth.newPassword) {
+                    setAuth((prev) => ({ ...prev, errorMessage: "New password is required", loading: false }));
                     return;
                 }
                 url = `${BACKEND_URL}/auth/reset-password`;
-                payload = { email, newPassword };
+                payload = { email: auth.email, newPassword: auth.newPassword };
             } else {
-                // Login or Signup request
-                url = `${BACKEND_URL}/auth/${isSignup ? "signup" : "login"}`;
-                payload = isSignup ? { email, username, password } : { email, password };
+                url = `${BACKEND_URL}/auth/${auth.authView === "signup" ? "signup" : "login"}`;
+
+                // Ensure `isShopkeeper` is sent during signup
+                payload = auth.authView === "signup"
+                    ? {
+                        email: auth.email,
+                        username: auth.username,
+                        password: auth.password,
+                        // isShopkeeper // Include isShopkeeper here
+                    }
+                    : { email: auth.email, password: auth.password };
             }
 
             const response = await axios.post(url, payload);
 
-            if (isForgotPassword) {
+            if (auth.authView === "forgotPassword") {
                 alert("Password reset successful! You can now log in.");
-                setIsForgotPassword(false);
-            } else if (isSignup) {
+                setAuth((prev) => ({ ...prev, authView: "login" }));
+            } else if (auth.authView === "signup") {
                 alert("Signup successful! You can now log in.");
-                setIsSignup(false);
+                setAuth((prev) => ({ ...prev, authView: "login" }));
             } else {
                 alert(response.data.message);
                 const { userId, username, isShopkeeper } = response.data;
@@ -64,85 +66,63 @@ const LoginSignup: React.FC<{
             }
         } catch (error) {
             console.error("Error:", error);
-            setErrorMessage("Operation failed. Please try again!");
+            setAuth((prev) => ({ ...prev, errorMessage: "Operation failed. Please try again!" }));
         } finally {
-            setLoading(false);
+            setAuth((prev) => ({ ...prev, loading: false }));
         }
     };
+
 
     return (
         <div className="login-signup">
             <div className="logo">
                 <img src={logo} alt="VK Electronics Logo" />
                 <div className="heading-login-signup">
-                    {isForgotPassword ? "Reset Password" : isSignup ? "Sign Up" : "Log In"}
+                    {auth.authView === "forgotPassword"
+                        ? "Reset Password"
+                        : auth.authView === "signup"
+                            ? "Sign Up"
+                            : "Log In"}
                 </div>
             </div>
             <form onSubmit={handleSubmit}>
-                {isForgotPassword ? (
+                {auth.authView === "forgotPassword" ? (
                     <>
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                        <input
-                            type="password"
-                            placeholder="Enter new password"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                            required
-                        />
-                        {errorMessage && <p className="error">{errorMessage}</p>}
-                        <button type="submit" disabled={loading}>
-                            {loading ? "Processing..." : "Reset Password"}
-                        </button>
-                        <p onClick={() => setIsForgotPassword(false)}>Back to Login</p>
+                        <input type="email" name="email" placeholder="Enter your email" value={auth.email} onChange={handleChange} required />
+                        <input type="password" name="newPassword" placeholder="Enter new password" value={auth.newPassword} onChange={handleChange} required />
+                        {auth.errorMessage && <p className="error">{auth.errorMessage}</p>}
+                        <button type="submit" disabled={auth.loading}>{auth.loading ? "Processing..." : "Reset Password"}</button>
+                        <p onClick={() => setAuth((prev) => ({ ...prev, authView: "login" }))}>Back to Login</p>
                     </>
                 ) : (
                     <>
-                        {isSignup && (
-                            <input
-                                type="text"
-                                placeholder="Username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                required
-                            />
+                        {auth.authView === "signup" && (
+                            <input type="text" name="username" placeholder="Username" value={auth.username} onChange={handleChange} required />
                         )}
-
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                        
-                        {errorMessage && <p className="error">{errorMessage}</p>}
-
-                        <button type="submit" disabled={loading}>
-                            {loading ? "Processing..." : isSignup ? "Sign Up" : "Log In"}
-                        </button>
-
-                        <p onClick={() => setIsSignup(!isSignup)}>
-                            {isSignup ? "Already have an account? Log In" : "Don't have an account? Sign Up"}
+                        <input type="email" name="email" placeholder="Email" value={auth.email} onChange={handleChange} required />
+                        <input type="password" name="password" placeholder="Password" value={auth.password} onChange={handleChange} required />
+                        {auth.errorMessage && <p className="error">{auth.errorMessage}</p>}
+                        <button type="submit" disabled={auth.loading}>{auth.loading ? "Processing..." : auth.authView === "signup" ? "Sign Up" : "Log In"}</button>
+                        <p onClick={() => setAuth((prev) => ({ ...prev, authView: auth.authView === "signup" ? "login" : "signup" }))}>
+                            {auth.authView === "signup" ? "Already have an account? Log In" : "Don't have an account? Sign Up"}
                         </p>
-
-                        <p onClick={() => setIsForgotPassword(true)}>Forgot Password?</p>
+                        <p onClick={() => setAuth((prev) => ({ ...prev, authView: "forgotPassword" }))}>Forgot Password?</p>
                     </>
                 )}
+                {/* {auth.authView === "signup" && (
+                    <div>
+                        <label>
+                            <span>Register as Shopkeeper</span>
+                            <input
+                                type="checkbox"
+                                checked={isShopkeeper}
+                                onChange={(e) => setIsShopkeeper(e.target.checked)}
+                            />
+                        </label>
+                    </div>
+                )} */}
             </form>
+            {/* <UserManagement /> */}
         </div>
     );
 };

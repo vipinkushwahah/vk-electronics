@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./navbar.scss";
 import SearchBar from "../hooks/search/search";
 import { Link, useLocation } from "react-router-dom";
+import logo from '../../assets/vklogo.png'
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -38,7 +39,7 @@ export const Navbar = () => {
       <nav className="navbar">
         <div className="logo-menu-container">
           <div className="menu-btn-container">
-            <div className="logo">🛍️ VK Electronics</div>
+            <img src={logo} className="logo" />
             <div className="nav-right">
               <SearchBar />
               {/* <button className="cart-btn">🛒</button> */}
