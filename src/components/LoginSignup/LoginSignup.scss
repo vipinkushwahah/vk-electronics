@@ -68,9 +68,31 @@
       transition: all 0.3s ease;
   }
   
-  button:hover {
-      background: rgba(255, 255, 255, 0.4); /* Lighten the button when hovered */
+  .eye-button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    text-align: right;
+    right: 24px;
+    top: 94px;
+    width: 40px;
   }
+
+  .eye-button-signup{
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    text-align: right;
+    right: 24px;
+    top: 160px;
+    width: 40px;
+  }
+  
+  // button:hover {
+  //     background: rgba(255, 255, 255, 0.4); /* Lighten the button when hovered */
+  // }
   .heading-login-signup, h3, p {
     color: white;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); /* Slight shadow for better text visibility */

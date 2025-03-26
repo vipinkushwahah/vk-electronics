@@ -4,6 +4,7 @@ import axios from "axios";
 import { authState } from "../LoginSignup/state";
 import "./LoginSignup.scss";
 import logo from "../../assets/vklogo.png";
+import { useState } from "react";
 // import UserManagement from "./UserManagement/UserManagement";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -12,6 +13,8 @@ const LoginSignup: React.FC<{ onLogin: (userId: string, username: string, isShop
     const [auth, setAuth] = useRecoilState(authState);
     // const [isShopkeeper, setIsShopkeeper] = useState(false);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const [showpassword, setshowPassword] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setAuth((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -23,6 +26,10 @@ const LoginSignup: React.FC<{ onLogin: (userId: string, username: string, isShop
 
         if (!emailRegex.test(auth.email)) {
             setAuth((prev) => ({ ...prev, errorMessage: "Invalid email format", loading: false }));
+            return;
+        }
+        if (!passwordRegex.test(auth.password)) {
+            setAuth((prev) => ({ ...prev, errorMessage: "Invalid password format", loading: false }));
             return;
         }
 
@@ -66,7 +73,7 @@ const LoginSignup: React.FC<{ onLogin: (userId: string, username: string, isShop
             }
         } catch (error) {
             console.error("Error:", error);
-            setAuth((prev) => ({ ...prev, errorMessage: "Operation failed. Please try again!" }));
+            setAuth((prev) => ({ ...prev, errorMessage: "User not found. Please try again!" }));
         } finally {
             setAuth((prev) => ({ ...prev, loading: false }));
         }
@@ -89,7 +96,8 @@ const LoginSignup: React.FC<{ onLogin: (userId: string, username: string, isShop
                 {auth.authView === "forgotPassword" ? (
                     <>
                         <input type="email" name="email" placeholder="Enter your email" value={auth.email} onChange={handleChange} required />
-                        <input type="password" name="newPassword" placeholder="Enter new password" value={auth.newPassword} onChange={handleChange} required />
+                        <input type={showpassword ? "text" : "password"} name="newPassword" placeholder="Enter new password" value={auth.newPassword} onChange={handleChange} required />
+                        <button className="eye-button" type='button' onClick={()=>setshowPassword(!showpassword)}><i className={showpassword ? "ri-eye-line" : "ri-eye-off-line"}></i></button>
                         {auth.errorMessage && <p className="error">{auth.errorMessage}</p>}
                         <button type="submit" disabled={auth.loading}>{auth.loading ? "Processing..." : "Reset Password"}</button>
                         <p onClick={() => setAuth((prev) => ({ ...prev, authView: "login" }))}>Back to Login</p>
@@ -100,7 +108,8 @@ const LoginSignup: React.FC<{ onLogin: (userId: string, username: string, isShop
                             <input type="text" name="username" placeholder="Username" value={auth.username} onChange={handleChange} required />
                         )}
                         <input type="email" name="email" placeholder="Email" value={auth.email} onChange={handleChange} required />
-                        <input type="password" name="password" placeholder="Password" value={auth.password} onChange={handleChange} required />
+                        <input type={showpassword ? "text" : "password"} name="password" placeholder="Password" value={auth.password} onChange={handleChange} required />
+                        <button className={auth.authView === "signup" ? "eye-button-signup" : "eye-button"} type='button' onClick={()=>setshowPassword(!showpassword)}><i className={showpassword ? "ri-eye-line" : "ri-eye-off-line"}></i></button>
                         {auth.errorMessage && <p className="error">{auth.errorMessage}</p>}
                         <button type="submit" disabled={auth.loading}>{auth.loading ? "Processing..." : auth.authView === "signup" ? "Sign Up" : "Log In"}</button>
                         <p onClick={() => setAuth((prev) => ({ ...prev, authView: auth.authView === "signup" ? "login" : "signup" }))}>
