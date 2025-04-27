@@ -39,7 +39,7 @@ const AddProduct: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setProduct({ ...product, [name]: name === "price" || name === "mrp" || name === "discount" || name === "bankOffer" ? Number(value) : value });
+    setProduct({ ...product, [name]: name === "price" || name === "mrp" || name === "discount" || name === "bankOffer" ? value : value });
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,7 +124,7 @@ const AddProduct: React.FC = () => {
               onChange={handlePasswordChange}
               required
             />
-            <button type="submit">Submit</button>
+            <button className="button" type="submit">Submit</button>
           </form>
         </div>
       ) : (
@@ -144,17 +144,17 @@ const AddProduct: React.FC = () => {
             
             {/* Image Preview */}
             {product.images.length > 0 && (
-              <div className="image-preview">
+              <div className="image-previewe">
                 <h3>Image Preview:</h3>
-                <div className="preview-images">
+                <div className="preview-imagess">
                   {product.images.map((image, index) => (
-                    <div key={index} className="preview-image">
+                    <div key={index} className="preview-imagee">
                       <img
                         src={URL.createObjectURL(image)}
                         alt={`Image ${index + 1}`}
                         className="image-thumb"
                       />
-                      <button type="button" onClick={() => handleImageRemove(index)} className="remove-image">
+                      <button  type="button" onClick={() => handleImageRemove(index)} className="remove-image">
                         Remove
                       </button>
                     </div>
@@ -178,7 +178,7 @@ const AddProduct: React.FC = () => {
               <option value="home-appliance">Home Appliance</option>
             </select>
 
-            <button type="submit" disabled={isLoading}>
+            <button className="button" type="submit" disabled={isLoading}>
               {isLoading ? (
                 <div className="loader"></div> // Circular loader
               ) : (

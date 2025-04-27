@@ -1,221 +1,232 @@
 body {
-    margin: 0;
-    font-family: 'Source Code Pro', monospace;
-    // margin-top: 20px;
-    /* background-color: #282222; */
-  }
-  /* General container styling */
-  .contact-container {
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 0 auto;
-    padding: 20px;
-    /* font-family: Arial, sans-serif; */
-    flex-wrap: wrap;
-    overflow-y: scroll;
-    margin-top: 20px;
-  }
-  
-  .contact-title {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #02fbac;
-    font-family: 'Source Code Pro', monospace;
-    margin: 25px 0px 0px 28px;
-  }
-  
-  .contact-thankyou {
-    text-align: center;
-    font-size: 1.2rem;
-    color: green;
-  }
-  
-  /* Form styling */
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 15px;
-    border: 1px solid gray;
-    background-color: #555;
-    width: 460px;
-    border-radius: 20px;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-wrap: wrap;
-  }
-  
-  .contact-title-paragraph {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 28px;
-    font-family: 'Source Code Pro', monospace;
-    color: rgb(174, 167, 167);
-  }
-  
-  .contact-title-paragraph-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .form-label {
-    margin-bottom: 5px;
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  .form-textarea {
-    width: 380px;
-    padding: 10px;
-    border: 1px solid #211f1f;
-    border-radius: 5px;
-    color: aliceblue;
-    font-size: 1rem;
-    background-color: #211f1f;
-  }
-  
-  .form-input {
-    width: 170px;
-    padding: 10px;
-    border: 1px solid #211f1f;
-    border-radius: 5px;
-    font-size: 1rem;
-    background-color: #211f1f;
-  }
-  
-  .form-textarea {
-    min-height: 100px;
-    resize: vertical;
-  }
-  
+  margin: 0;
+  font-family: 'Source Code Pro', monospace;
+  // margin-top: 20px;
+  /* background-color: #282222; */
+}
+
+/* General container styling */
+.contact-container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 0 auto;
+  padding: 20px;
+  /* font-family: Arial, sans-serif; */
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  margin-top: 20px;
+}
+
+.contact-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #02fbac;
+  font-family: 'Source Code Pro', monospace;
+  margin: 25px 0px 0px 28px;
+}
+
+.contact-thankyou {
+  text-align: center;
+  font-size: 1.2rem;
+  color: green;
+}
+
+/* Form styling */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 15px;
+  border: 1px solid gray;
+  background-color: #555;
+  width: 460px;
+  border-radius: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.contact-title-paragraph {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 28px;
+  font-family: 'Source Code Pro', monospace;
+  color: rgb(174, 167, 167);
+}
+
+.contact-title-paragraph-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.form-label {
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.form-textarea {
+  width: 380px;
+  padding: 10px;
+  border: 1px solid #211f1f;
+  border-radius: 5px;
+  color: aliceblue;
+  font-size: 1rem;
+  background-color: #211f1f;
+}
+
+.form-input {
+  width: 170px;
+  padding: 10px;
+  border: 1px solid #211f1f;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #211f1f;
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-button {
+  padding: 10px 20px;
+  background: rgb(0, 255, 170);
+  color: rgb(22, 21, 21);
+  border: 1px solid rgb(0, 255, 170);
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 156px;
+  margin: 0px 0px 20px 28px;
+}
+
+.form-button:hover {
+  background: darkblue;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .form-button {
-    padding: 10px 20px;
-    background: rgb(0, 255, 170);
-    color: rgb(22, 21, 21);
-    border: 1px solid rgb(0, 255, 170);
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1rem;
-    width: 156px;
-    margin: 0px 0px 20px 28px;
+    font-size: 0.9rem;
+    padding: 8px 15px;
   }
-  
-  .form-button:hover {
-    background: darkblue;
+
+  .form-input,
+  .form-textarea {
+    font-size: 0.9rem;
+    width: 282px;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .form-button {
-        font-size: 0.9rem;
-        padding: 8px 15px;
-    }
-  
-    .form-input,
-    .form-textarea {
-        font-size: 0.9rem;
-        width: 282px;
-    }
+}
+
+@media (max-width: 480px) {
+  .contact-title {
+    font-size: 1.2rem;
   }
-  
-  @media (max-width: 480px) {
-    .contact-title {
-        font-size: 1.2rem;
-    }
-  
-    .form-button {
-        width: 150px;
-        margin-left: 15px;
-    }
-    .about__coverage{
-      margin: 20px 16px 20px 16px;
-    }
-    .about__title{
-      margin-bottom: 2rem !important;
-    }
-    .about__description,
-    .about__services,
-    .about__quality{
-      margin: 20px 16px 0px 16px !important;
-    }
-    .contact-title-paragraph,
-    .contact-title {
-        margin: unset !important;
-        padding: 10px 0px 0px 10px;
-    }
-    .contact-form {
-        width: 384px !important;
-        padding: unset !important;
-    }
-    .contact-container {
-        padding: unset !important;
-    }
+
+  .form-button {
+    width: 150px;
+    margin-left: 15px;
   }
-  
-  .contact-info-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-    font-family: 'Source Code Pro', monospace;
+
+  .about__coverage {
+    margin: 20px 16px 20px 16px;
   }
-  
-  .contact-info-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+
+  .about__title {
+    margin-bottom: 2rem !important;
   }
-  
-  .contact-info-icon {
-    border: 1px solid gray;
-    background-color: #555;
-    padding: 5px;
-    font-size: 24px;
-    color: #00ffbb;
-    border-radius: 10px;
+
+  .about__description,
+  .about__services,
+  .about__quality {
+    margin: 20px 16px 0px 16px !important;
   }
-  
-  .contact-info-details {
-    display: flex;
-    flex-direction: column;
+
+  .contact-title-paragraph,
+  .contact-title {
+    margin: unset !important;
+    padding: 10px 0px 0px 10px;
   }
-  
-  .contact-info-title {
-    font-weight: bold;
-    font-size: 20px;
-    color: rgb(249, 131, 5);
+
+  .contact-form {
+    width: 384px !important;
+    padding: unset !important;
   }
-  
-  .contact-info-value {
-    font-size: 16px;
-    padding: 5px;
-    /* color: rgb(23, 24, 23); */
+
+  .contact-container {
+    padding: unset !important;
   }
-  
-  .contact-map {
-    margin: 20px 22px 10px 22px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  .main_image {
-    width: 96%;
-    height: 100%;
-    object-fit: cover;
-    margin: 8px;
-    border-radius: 35px;
-  }
-  
+}
+
+.contact-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  font-family: 'Source Code Pro', monospace;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.contact-info-icon {
+  border: 1px solid gray;
+  background-color: #555;
+  padding: 5px;
+  font-size: 24px;
+  color: #00ffbb;
+  border-radius: 10px;
+}
+
+.contact-info-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-info-title {
+  font-weight: bold;
+  font-size: 20px;
+  // color: rgb(249, 131, 5);
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-info-value {
+  font-size: 16px;
+  padding: 5px;
+  text-decoration: none;
+  color: inherit;
+  /* color: rgb(23, 24, 23); */
+}
+
+.contact-map {
+  margin: 20px 22px 10px 22px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main_image {
+  width: 96%;
+  height: 100%;
+  object-fit: cover;
+  margin: 8px;
+  border-radius: 35px;
+}

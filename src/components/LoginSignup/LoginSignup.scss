@@ -1,137 +1,163 @@
-.login-signup {
-    width: 340px;
-    margin: 0 auto;
-    padding: 10px 20px;
-    background: #fff; /* Semi-transparent white */
-    border-radius: 15px;
-    backdrop-filter: blur(10px); /* Frosted glass blur effect */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    
-    .heading-login-signup {
-      transform: translateY(8px);
-    font-weight: 900;
-    font-size: 30px;
-    }
-    label{
-      display: flex;
-    }
-    label{
-      input{
-      width: unset !important;
-      transform: translate(16px, -5px);
-    }
-  }
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      background: #e0e0e0;; /* Slightly darker for better contrast */
-      border-radius: 15px;
-      backdrop-filter: blur(10px); /* Frosted glass blur effect */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border to enhance effect */
-      width: 300px; /* Fixed width for form */
-  }
-  
-  /* Glassmorphism effect for input fields */
-  input {
-      width: 92%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid rgba(255, 255, 255, 0.4); /* Lighter border for better visibility */
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.3); /* Semi-transparent background */
-      color: #252222; /* White text for visibility */
-      font-size: 16px;
-      transition: all 0.3s ease;
-  }
-  
-  /* Input field focus styling */
-  input:focus {
-      outline: none;
-      border-color: rgba(255, 255, 255, 0.7); /* Highlight border when focused */
-      background: rgba(255, 255, 255, 0.4); /* Slightly more opaque when focused */
-  }
-  
-  /* Glassmorphism effect for the submit button */
-  button {
-      width: 100%;
-      padding: 12px;
-      background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
-      border: none;
-      border-radius: 10px;
-      color: #555;
-      font-size: 18px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-  }
-  
-  .eye-button{
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    text-align: right;
-    right: 24px;
-    top: 94px;
-    width: 40px;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppons", sans-serif;
+}
 
-  .eye-button-signup{
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    text-align: right;
-    right: 24px;
-    top: 160px;
-    width: 40px;
-  }
-  
-  // button:hover {
-  //     background: rgba(255, 255, 255, 0.4); /* Lighten the button when hovered */
-  // }
-  .heading-login-signup, h3, p {
-    color: white;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7); /* Slight shadow for better text visibility */
-    filter: brightness(1.2); /* Add brightness to text for better visibility */
-}  
-    p {
-      text-align: center;
-      color: #fff;
-      cursor: pointer;
-    }
-  }
-  .logo img {
-    height: 50px;
-  }
-  
-  .login-signup {
-    .logo {
-      display: flex;
-      justify-content: space-between;
-    }
-    .error {
-        color: red;
-        font-size: 14px;
-    }
-    button:disabled {
-        background-color: grey;
-        cursor: not-allowed;
-    }
-    // .loader {
-    //     width: 16px;
-    //     height: 16px;
-    //     border: 3px solid white;
-    //     border-top: 3px solid transparent;
-    //     border-radius: 50%;
-    //     display: inline-block;
-    //     animation: spin 1s linear infinite;
-    // }
-    // @keyframes spin {
-    //     0% { transform: rotate(0deg); }
-    //     100% { transform: rotate(360deg); }
-    // }
+.LoginSignup-main-container-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.box {
+  background: linear-gradient(#555 0%, #666 35%, #0a0a0a 100%);
+  position: relative;
+  border-radius: 20px;
+  transform-style: preserve-3d;
+  box-shadow: 0 0 5px #111111, 0 0 15px #131314, 0 0 25px #2a2a2b, 0 0 100px #0a0a0a;
+}
+
+.box .card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  width: 300px;
+  min-height: 412px;
+  border: 1px solid  #666;
+  border-top: 1px solid rgb(255, 255, 255, 0.75);
+  border-left: 1px solid rgb(255, 255, 255, 0.75);
+  border-radius: 20px;
+  box-shadow: 0 25px 45px rgb(0, 0, 0, 0.5);
+  transform-style: preserve-3d;
+}
+
+.elements {
+  position: absolute;
+  top: 34px;
+  left: -30px;
+  width: 100px;
+  height: 100px;
+  background: rgb(255, 255, 255, 0.1);
+  transform: translateZ(80px);
+  /* backdrop-filter: blur(10px); */
+  border: 1px solid rgb(255, 255, 255, 0.5);
+  border-top: 1px solid rgb(255, 255, 255, 0.75);
+  border-left: 1px solid rgb(255, 255, 255, 0.75);
+  border-radius: 20px;
+  box-shadow: 0 25px 45px rgb(0, 0, 0, 0.5);
+}
+
+.elements.name {
+  top: 90px;
+  left: initial;
+  right: 50px;
+  width: 100px;
+  padding: 10px;
+
+  text-align: center;
+  transform: translateZ(100px);
+  background: transparent;
+  backdrop-filter: blur(10px);
+  border: none;
+  box-shadow: none;
+  opacity: 1;
+  color: white;
+}
+
+.elements.code::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('../../assets/gojo.png') no-repeat center center;
+  background-size: 100px;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  box-shadow: 0 0 5px #111111, 0 0 15px #131314, 0 0 25px #2a2a2b, 0 0 100px #0a0a0a;
+
+}
+
+.elements.content {
+  top: initial;
+  left: initial;
+  bottom: 32px;
+  right: 42px;
+  width: 70%;
+  min-height: 234px;
+  padding: 10px;
+  transform: translateZ(180px);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 5px #111111, 0 0 15px #131314, 0 0 25px #2a2a2b, 0 0 100px #0a0a0a;
+
+}
+
+input {
+  background: transparent;
+  padding: 7px;
+  margin-bottom: 10px;
+  outline: none;
+  border: none;
+  font-size: 0.9em;
+  border: 1px solid rgb(255, 255, 255, 0.5);
+  border-top: 1px solid rgb(255, 255, 255, 0.75);
+  border-left: 1px solid rgb(255, 255, 255, 0.75);
+  border-radius: 10px;
+  width: 100%;
+}
+
+button {
+  width: 40%;
+  background-color: transparent;
+  color: white;
+  padding: 10px 0;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid rgb(255, 255, 255, 0.5);
+  border-top: 1px solid rgb(255, 255, 255, 0.75);
+  border-left: 1px solid rgb(255, 255, 255, 0.75);
+  border-radius: 10px;
+  width: 100%;
+}
+
+// button:hover {
+//   background-color: #090979;
+// }
+
+::placeholder {
+  color: rgb(231, 88, 10);
+  font-size: 10px;
+  padding-left: 5px;
+}
+
+.eye-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  text-align: right;
+  right: 24px;
+  top: 70px;
+  width: 40px;
+}
+
+.eye-button-signup {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  text-align: right;
+  right: 24px;
+  top: 100px;
+  width: 40px;
+}
+
+.input-error {
+  border: 2px solid red;
+  outline: none;
 }

@@ -1,59 +1,92 @@
 .add-product-form {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    
-    h2 {
-      text-align: center;
-    }
-  
-    form {
-      display: flex;
-      flex-direction: column;
-      
-      input, textarea {
-        margin-bottom: 10px;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-      }
-  
-      button {
-        padding: 10px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-  
-        &:hover {
-          background-color: #218838;
-        }
-      }
-      .category-selection {
-        margin-bottom: 10px;
-        font-size: 24px;
-        font-weight: 800;
-      }
-    }
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
   }
 
-  /* Loader styles */
+  form {
+    display: flex;
+    flex-direction: column;
+    
+    input, textarea {
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .button {
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #218838;
+      }
+    }
+    .category-selection {
+      margin-bottom: 10px;
+      font-size: 24px;
+      font-weight: 800;
+    }
+  }
+}
+
+.image-previewe {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.preview-imagess{
+  display: flex;
+  overflow-y: scroll;
+  flex-wrap: wrap;
+  height: 300px;
+}
+
+.preview-imagee{
+ width: 222px;
+}
+
+/* Loader styles */
 .loader {
-  border: 4px solid #f3f3f3; /* Light gray background */
-  border-top: 4px solid #3498db; /* Blue spinner */
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  animation: spin 2s linear infinite;
-  margin-left: 164px;
+border: 4px solid #f3f3f3; /* Light gray background */
+border-top: 4px solid #3498db; /* Blue spinner */
+border-radius: 50%;
+width: 20px;
+height: 20px;
+animation: spin 2s linear infinite;
+margin-left: 164px;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
 }
-  
+
+.image-thumb {
+width: 200px;
+height: 200px;
+text-align: center;
+object-fit: cover;
+border-radius: 10px;
+margin: 10px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: transform 0.2s;
+flex-wrap: wrap;
+
+&:hover {
+  transform: scale(1.05);
+}
+}

@@ -4,38 +4,42 @@ import { Button } from "../hooks/Button";
 import RepairServices from "../repairservice/repair";
 import OurProducts from "../ourproducts/ourproduct";
 import { Helmet } from "react-helmet-async"; // Import Helmet
+import nothing from "../../assets/nothing.png";
+import samsung from "../../assets/samsung.png";
+import googal from "../../assets/googal.png";
+import vivo from "../../assets/vivo.png";
 
 // Slide data
 const slides = [
   {
     title: "Up to 50% off on all mobile phones",
-    description: "Get the best deals on stylish outfits. Don't miss out!",
+    description: "Get the best deals on stylish Electronics. Don't miss out!",
     image: "https://img.freepik.com/free-photo/young-woman-trendy-stylish-glasses-bright-orange-oversized-jacket-white-background-holds-phone-with-blank-white-screen_343596-8188.jpg"
   },
   {
     title: "New Arrivals in home appliances",
-    description: "Trendy and stylish outfits now available.",
+    description: "Trendy and stylish Gadgets now available.",
     image: "https://img.freepik.com/free-photo/smiling-woman-holding-shopping-bags_171337-13172.jpg"
   },
   {
     title: "Electronics Mega Sale",
     description: "Up to 60% off on the latest gadgets.",
-    image: "https://img.freepik.com/free-photo/handsome-man-wearing-glasses-denim-shirt-standing-gray-wall_171337-10814.jpg"
+    image: nothing  // ✅ 
   },
   {
-    title: "Electronics Mega Sale",
-    description: "Up to 60% off on the latest gadgets.",
-    image: "https://img.freepik.com/free-photo/handsome-man-wearing-glasses-denim-shirt-standing-gray-wall_171337-10814.jpg"
+    title: "Samsung Mega Sale",
+    description: "Up to 60% off on Samsung gadgets.",
+    image: samsung  // ✅
   },
   {
-    title: "Electronics Mega Sale",
-    description: "Up to 60% off on the latest gadgets.",
-    image: "https://img.freepik.com/free-photo/handsome-man-wearing-glasses-denim-shirt-standing-gray-wall_171337-10814.jpg"
+    title: "Google Pixel Launch",
+    description: "Explore the latest Google Pixel deals.",
+    image: googal   // ✅
   },
   {
-    title: "Electronics Mega Sale",
-    description: "Up to 60% off on the latest gadgets.",
-    image: "https://img.freepik.com/free-photo/handsome-man-wearing-glasses-denim-shirt-standing-gray-wall_171337-10814.jpg"
+    title: "Vivo Smartphone Deals",
+    description: "Exclusive offers on Vivo smartphones.",
+    image: vivo     // ✅
   }
 ];
 

@@ -1,10 +1,9 @@
-// import React, { useState } from "react";
+import './LoginSignup.scss';
 import { useRecoilState } from "recoil";
-import axios from "axios";
 import { authState } from "../LoginSignup/state";
-import "./LoginSignup.scss";
-import logo from "../../assets/vklogo.png";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import VanillaTilt from 'vanilla-tilt';
 // import UserManagement from "./UserManagement/UserManagement";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -12,9 +11,23 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const LoginSignup: React.FC<{ onLogin: (userId: string, username: string, isShopkeeper: boolean) => void; }> = ({ onLogin }) => {
     const [auth, setAuth] = useRecoilState(authState);
     // const [isShopkeeper, setIsShopkeeper] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [errorFields, setErrorFields] = useState<string[]>([]);
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    const [showpassword, setshowPassword] = useState(false);
+
+    useEffect(() => {
+        const boxes = document.querySelectorAll(".box");
+        if (boxes.length > 0) {
+            VanillaTilt.init(Array.from(boxes) as HTMLElement[], {
+                max: 5,
+                speed: 10,
+                glare: true,
+                "max-glare": 0.5
+            });
+        }
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setAuth((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -23,13 +36,32 @@ const LoginSignup: React.FC<{ onLogin: (userId: string, username: string, isShop
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setAuth((prev) => ({ ...prev, loading: true, errorMessage: "" }));
+        setErrorFields([]);
+
+        const errors: string[] = [];
+        const errorInputs: string[] = [];
 
         if (!emailRegex.test(auth.email)) {
-            setAuth((prev) => ({ ...prev, errorMessage: "Invalid email format", loading: false }));
-            return;
+            errors.push("Invalid email format");
+            errorInputs.push("email");
         }
-        if (!passwordRegex.test(auth.password)) {
-            setAuth((prev) => ({ ...prev, errorMessage: "Invalid password format", loading: false }));
+        if (auth.authView !== "forgotPassword" && !passwordRegex.test(auth.password)) {
+            errors.push("Invalid password format (must contain uppercase, lowercase, number, special character, 8+ characters)");
+            errorInputs.push("password");
+        }
+        if (auth.authView === "signup" && !auth.username) {
+            errors.push("Username is required");
+            errorInputs.push("username");
+        }
+        if (auth.authView === "forgotPassword" && !auth.newPassword) {
+            errors.push("New password is required");
+            errorInputs.push("newPassword");
+        }
+
+        if (errors.length > 0) {
+            alert(errors.join("\n"));
+            setErrorFields(errorInputs);
+            setAuth((prev) => ({ ...prev, loading: false }));
             return;
         }
 
@@ -38,10 +70,6 @@ const LoginSignup: React.FC<{ onLogin: (userId: string, username: string, isShop
             let payload = {};
 
             if (auth.authView === "forgotPassword") {
-                if (!auth.newPassword) {
-                    setAuth((prev) => ({ ...prev, errorMessage: "New password is required", loading: false }));
-                    return;
-                }
                 url = `${BACKEND_URL}/auth/reset-password`;
                 payload = { email: auth.email, newPassword: auth.newPassword };
             } else {
@@ -71,54 +99,113 @@ const LoginSignup: React.FC<{ onLogin: (userId: string, username: string, isShop
                 const { userId, username, isShopkeeper } = response.data;
                 onLogin(userId, username, isShopkeeper);
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error:", error);
-            setAuth((prev) => ({ ...prev, errorMessage: "User not found. Please try again!" }));
+            if (error.response && error.response.status === 404 && auth.authView === "login") {
+                alert("User not found. Redirecting to signup...");
+                setAuth((prev) => ({ ...prev, authView: "signup" }));
+            } else {
+                alert("Something went wrong. Please try again!");
+            }
         } finally {
             setAuth((prev) => ({ ...prev, loading: false }));
         }
     };
 
-
     return (
-        <div className="login-signup">
-            <div className="logo">
-                <img src={logo} alt="VK Electronics Logo" />
-                <div className="heading-login-signup">
-                    {auth.authView === "forgotPassword"
-                        ? "Reset Password"
-                        : auth.authView === "signup"
-                            ? "Sign Up"
-                            : "Log In"}
+        <div className='LoginSignup-main-container-animation'>
+            <div className="box">
+                <div className="elements code"></div>
+                <div className="elements name">
+                    <div className="heading-login-signup">
+                        {auth.authView === "forgotPassword"
+                            ? "Reset Password"
+                            : auth.authView === "signup"
+                                ? "Sign Up"
+                                : "Log In"}
+                    </div>
                 </div>
-            </div>
-            <form onSubmit={handleSubmit}>
-                {auth.authView === "forgotPassword" ? (
-                    <>
-                        <input type="email" name="email" placeholder="Enter your email" value={auth.email} onChange={handleChange} required />
-                        <input type={showpassword ? "text" : "password"} name="newPassword" placeholder="Enter new password" value={auth.newPassword} onChange={handleChange} required />
-                        <button className="eye-button" type='button' onClick={()=>setshowPassword(!showpassword)}><i className={showpassword ? "ri-eye-line" : "ri-eye-off-line"}></i></button>
-                        {auth.errorMessage && <p className="error">{auth.errorMessage}</p>}
-                        <button type="submit" disabled={auth.loading}>{auth.loading ? "Processing..." : "Reset Password"}</button>
-                        <p onClick={() => setAuth((prev) => ({ ...prev, authView: "login" }))}>Back to Login</p>
-                    </>
-                ) : (
-                    <>
-                        {auth.authView === "signup" && (
-                            <input type="text" name="username" placeholder="Username" value={auth.username} onChange={handleChange} required />
+                <div className="elements content">
+                    <form onSubmit={handleSubmit}>
+                        {auth.authView === "forgotPassword" ? (
+                            <>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Enter your email"
+                                    value={auth.email}
+                                    onChange={handleChange}
+                                    required
+                                    className={errorFields.includes("email") ? "input-error" : ""}
+                                />
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    name="newPassword"
+                                    placeholder="Enter new password"
+                                    value={auth.newPassword}
+                                    onChange={handleChange}
+                                    required
+                                    className={errorFields.includes("newPassword") ? "input-error" : ""}
+                                />
+                                <button className="eye-button" type="button" onClick={() => setShowPassword(!showPassword)}>
+                                    <i className={showPassword ? "ri-eye-line" : "ri-eye-off-line"}></i>
+                                </button>
+                                <button type="submit" disabled={auth.loading}>
+                                    {auth.loading ? "Processing..." : "Reset Password"}
+                                </button>
+                                <p onClick={() => setAuth((prev) => ({ ...prev, authView: "login" }))}>
+                                    Click hear if you want to go back again to login page
+                                </p>
+                            </>
+                        ) : (
+                            <>
+                                {auth.authView === "signup" && (
+                                    <input
+                                        type="text"
+                                        name="username"
+                                        placeholder="Username"
+                                        value={auth.username}
+                                        onChange={handleChange}
+                                        required
+                                        className={errorFields.includes("username") ? "input-error" : ""}
+                                    />
+                                )}
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    value={auth.email}
+                                    onChange={handleChange}
+                                    required
+                                    className={errorFields.includes("email") ? "input-error" : ""}
+                                />
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    name="password"
+                                    placeholder="Password"
+                                    value={auth.password}
+                                    onChange={handleChange}
+                                    required
+                                    className={errorFields.includes("password") ? "input-error" : ""}
+                                />
+                                <button className={auth.authView === "signup" ? "eye-button-signup" : "eye-button"} type="button" onClick={() => setShowPassword(!showPassword)}>
+                                    <i className={showPassword ? "ri-eye-line" : "ri-eye-off-line"}></i>
+                                </button>
+                                <button type="submit" disabled={auth.loading}>
+                                    {auth.loading ? "Processing..." : auth.authView === "signup" ? "Sign Up" : "Log In"}
+                                </button>
+                                <p onClick={() => setAuth((prev) => ({ ...prev, authView: auth.authView === "signup" ? "login" : "signup" }))}>
+                                    {auth.authView === "signup" ? "Already have an account? Log In" : "Don't have an account? Sign Up"}
+                                </p>
+                                {/* Forgot Password visible only on login */}
+                                {auth.authView === "login" && (
+                                    <p onClick={() => setAuth((prev) => ({ ...prev, authView: "forgotPassword" }))}>
+                                        Forgot Password?
+                                    </p>
+                                )}
+                            </>
                         )}
-                        <input type="email" name="email" placeholder="Email" value={auth.email} onChange={handleChange} required />
-                        <input type={showpassword ? "text" : "password"} name="password" placeholder="Password" value={auth.password} onChange={handleChange} required />
-                        <button className={auth.authView === "signup" ? "eye-button-signup" : "eye-button"} type='button' onClick={()=>setshowPassword(!showpassword)}><i className={showpassword ? "ri-eye-line" : "ri-eye-off-line"}></i></button>
-                        {auth.errorMessage && <p className="error">{auth.errorMessage}</p>}
-                        <button type="submit" disabled={auth.loading}>{auth.loading ? "Processing..." : auth.authView === "signup" ? "Sign Up" : "Log In"}</button>
-                        <p onClick={() => setAuth((prev) => ({ ...prev, authView: auth.authView === "signup" ? "login" : "signup" }))}>
-                            {auth.authView === "signup" ? "Already have an account? Log In" : "Don't have an account? Sign Up"}
-                        </p>
-                        <p onClick={() => setAuth((prev) => ({ ...prev, authView: "forgotPassword" }))}>Forgot Password?</p>
-                    </>
-                )}
-                {/* {auth.authView === "signup" && (
+                        {/* {auth.authView === "signup" && (
                     <div>
                         <label>
                             <span>Register as Shopkeeper</span>
@@ -130,7 +217,10 @@ const LoginSignup: React.FC<{ onLogin: (userId: string, username: string, isShop
                         </label>
                     </div>
                 )} */}
-            </form>
+                    </form>
+                </div>
+                <div className="card"></div>
+            </div>
             {/* <UserManagement /> */}
         </div>
     );

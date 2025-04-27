@@ -128,7 +128,9 @@ const Contact = () => {
                         </div>
                         <div className="contact-info-details">
                             <div className="contact-info-title">Phone</div>
-                            <div className="contact-info-value">(+91) 7420 8683 46</div>
+                            <a href="tel:+917420868346" className="contact-info-value">
+                                (+91) 7420 8683 46
+                            </a>
                         </div>
                     </div>
 
@@ -138,7 +140,9 @@ const Contact = () => {
                         </div>
                         <div className="contact-info-details">
                             <div className="contact-info-title">Email</div>
-                            <div className="contact-info-value">vkelectronics@gmail.com</div>
+                            <a href="mailto:vkelectronics@gmail.com?subject=Inquiry&body=Hello, I would like to know more about your products." className="contact-info-value">
+                                vkelectronics@gmail.com
+                            </a>
                         </div>
                     </div>
 
@@ -148,7 +152,14 @@ const Contact = () => {
                         </div>
                         <div className="contact-info-details">
                             <div className="contact-info-title">Address</div>
-                            <div className="contact-info-value">Bangra, Deoria, Uttar-Pradesh -274509</div>
+                            <a
+                                href="https://www.google.com/maps/search/?api=1&query=Bagra, Uttar Pradesh 274702"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="contact-info-value"
+                            >
+                              Bhatpar Rani,Deoria, Uttar Pradesh-274702
+                            </a>
                         </div>
                     </div>
                 </div>

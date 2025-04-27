@@ -154,11 +154,11 @@ const ProductManagement: React.FC = () => {
 
             {/* Image Preview Section */}
             {newProduct.images.length > 0 && (
-              <div className="image-preview">
+              <div className="image-previewe">
                 <h3>Image Preview:</h3>
-                <div className="preview-images">
+                <div className="preview-imagess">
                   {newProduct.images.map((image, index) => (
-                    <div key={index} className="preview-image">
+                    <div key={index} className="preview-imagee">
                       <img
                         src={image instanceof File ? URL.createObjectURL(image) : `data:image/jpeg;base64,${image}`}
                         alt={`Image ${index + 1}`}

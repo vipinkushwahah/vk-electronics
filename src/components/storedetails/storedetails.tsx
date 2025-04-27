@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./storedetails.scss";
 import pic from "../qrcode/Screenshot 2025-02-15 at 8.09.28 PM.png"
 
@@ -8,14 +8,34 @@ interface StoreDetailsProps {
 }
 
 const StoreDetails: React.FC<StoreDetailsProps> = ({ isOpen, onClose }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleOutsideClick(event: MouseEvent) {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    } else {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
     <div className="store-modal">
-      <div className="store-modal-content">
+      <div className="store-modal-content" ref={modalRef}>
         <button className="close-button" onClick={onClose}>✖</button>
         <h2 className="store-title">Vivek Kushwaha Electronics & Home Appliance</h2>
-        
+
         <div className="store-info">
           <img 
             src={pic}

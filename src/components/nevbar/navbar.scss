@@ -7,9 +7,9 @@
   // border-radius: 5px;
   transition: 0.3s ease-in-out;
 
-  &:hover {
-    // background: rgba(255, 153, 0, 0.8);
-  }
+  // &:hover {
+  //   // background: rgba(255, 153, 0, 0.8);
+  // }
 }
 
 .menu-btn-container {
@@ -87,8 +87,8 @@
   // Close button (✖️)
   .close-btn {
     position: absolute;
-    top: 1rem;
-    right: 1.5rem;
+    top: 0rem;
+    right: -4.5rem;
     font-size: 1.5rem;
     background: none;
     border: none;

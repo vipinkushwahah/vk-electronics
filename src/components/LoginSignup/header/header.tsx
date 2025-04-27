@@ -1,12 +1,24 @@
 import React from 'react';
 import './header.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../../../assets/logo.png';
-import { authState } from '../state'; // Import Recoil state
+import { authState } from '../state';
 import { useRecoilState } from 'recoil';
 
 const Header: React.FC = () => {
-  const [, setAuth] = useRecoilState(authState); // Only updating state, no need to read it
+  const [, setAuth] = useRecoilState(authState);
+  const location = useLocation();
+
+  const handleAuthView = (view: "login" | "signup") => {
+    if (location.pathname === "/reviews") {
+      // Already on reviews page, just change view
+      setAuth((prev) => ({ ...prev, authView: view }));
+    } else {
+      // Navigate user to reviews page if not already there
+      window.location.href = "/reviews"; // simple redirect (optional: use navigate() from react-router)
+      setAuth((prev) => ({ ...prev, authView: view }));
+    }
+  };
 
   return (
     <header className="header">
@@ -17,12 +29,8 @@ const Header: React.FC = () => {
           </Link>
         </div>
         <nav className="nav-links">
-          <Link to="/login" onClick={() => setAuth((prev) => ({ ...prev, authView: "login" }))}>
-            Login
-          </Link>
-          <Link to="/signup" onClick={() => setAuth((prev) => ({ ...prev, authView: "signup" }))}>
-            Signup
-          </Link>
+          <a onClick={() => handleAuthView("login")}>Login</a>
+          <a onClick={() => handleAuthView("signup")}>Signup</a>
         </nav>
       </div>
     </header>
