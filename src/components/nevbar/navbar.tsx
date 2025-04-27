@@ -39,7 +39,7 @@ export const Navbar = () => {
       <nav className="navbar">
         <div className="logo-menu-container">
           <div className="menu-btn-container">
-            <img src={logo} className="logo" />
+          <Link to="/"><img src={logo} className="logo" /></Link>
             <div className="nav-right">
               <SearchBar />
               {/* <button className="cart-btn">🛒</button> */}

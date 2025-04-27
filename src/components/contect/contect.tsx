@@ -2,6 +2,7 @@ import { useState } from "react";
 import emailjs from '@emailjs/browser';
 import "./contect.scss";
 import QRCodeComponent from "../qrcode/qrcode";
+import saturo from "../../assets/saturo.png"; // Import your image here
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -58,13 +59,13 @@ const Contact = () => {
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="contact-form">
-                        <div className="contact-title">Let's work together</div>
+                        <img className="contact-title" src={saturo} alt="gojo"/>
                         <div className="contact-title-paragraph">
                             "mobile selling and reparing shop"
                         </div>
                         <div className="contact-title-paragraph-form">
                             <div className="form-group">
-                                <label htmlFor="name" className="form-label">Name:</label>
+                                {/* <label htmlFor="name" className="form-label">Name:</label> */}
                                 <input
                                     type="text"
                                     id="name"
@@ -78,7 +79,7 @@ const Contact = () => {
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="name" className="form-label">Phone:</label>
+                                {/* <label htmlFor="name" className="form-label">Phone:</label> */}
                                 <input
                                     type="text"
                                     id="phone"
@@ -90,7 +91,7 @@ const Contact = () => {
                                 />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="email" className="form-label">Email:</label>
+                                {/* <label htmlFor="email" className="form-label">Email:</label> */}
                                 <input
                                     type="email"
                                     id="email"
@@ -104,7 +105,7 @@ const Contact = () => {
                             </div>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="message" className="form-label">Message:</label>
+                            {/* <label htmlFor="message" className="form-label">Message:</label> */}
                             <textarea
                                 id="message"
                                 name="message"
