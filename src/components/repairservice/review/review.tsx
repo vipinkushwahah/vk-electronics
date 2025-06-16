@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./ReviewComponent.scss";
 import SkeletonLoader from "../../hooks/skeletonloader/skeletonloader";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Review {
   _id: string;
@@ -44,7 +46,7 @@ const ReviewComponent: React.FC<{ productId: string; userId: string; username: s
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (rating === 0 || !comment.trim()) return alert("Please add a rating and comment.");
+    if (rating === 0 || !comment.trim()) return toast("Please add a rating and comment.");
 
     setIsSubmitting(true); // Start loading state
     const formData = new FormData();
@@ -92,7 +94,7 @@ const ReviewComponent: React.FC<{ productId: string; userId: string; username: s
       const reviewToDelete = reviews.find((review) => review._id === reviewId);
       if (reviewToDelete && reviewToDelete.userId !== userId) {
         setIsDeleting(false); // Hide loading if user is trying to delete someone else's review
-        return alert("You can only delete your own reviews.");
+        return toast("You can only delete your own reviews.");
       }
     }
 

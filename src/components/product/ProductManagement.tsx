@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./productManagement.scss";
 import SkeletonLoader from "../hooks/skeletonloader/skeletonloader";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Product {
   _id: string;
@@ -127,7 +129,7 @@ const ProductManagement: React.FC = () => {
     if (password === "vivek") {
       setIsAuthorized(true);
     } else {
-      alert("❌ Incorrect Password!");
+      toast("❌ Incorrect Password!");
     }
   };
 

@@ -25,6 +25,10 @@ import RepairServices from "./components/repairservice/repair";
 import Header from "./components/LoginSignup/header/header";
 import FotterLogin from "./components/fotter/fotterlogin";
 
+// ✅ Toastify
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const App: React.FC = () => {
   const [userId, setUserId] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
@@ -43,6 +47,8 @@ const App: React.FC = () => {
             setIsShopkeeper(isShopkeeper);
           }}
         />
+        {/* ✅ Toast Container at top level */}
+        <ToastContainer position="top-right" autoClose={3000} />
       </Router>
     </HelmetProvider>
   );

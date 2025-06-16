@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -19,7 +21,7 @@ const UserManagement: React.FC = () => {
             setUsers(response.data);
         } catch (error) {
             console.error("Error fetching users:", error);
-            alert("Failed to fetch users.");
+            toast("Failed to fetch users.");
         }
         setLoading(false);
     };
@@ -30,10 +32,10 @@ const UserManagement: React.FC = () => {
         try {
             await axios.delete(`${BACKEND_URL}/auth/users/${userId}`);
             setUsers(users.filter((user) => user._id !== userId)); // Remove user from state
-            alert("User deleted successfully!");
+            toast("User deleted successfully!");
         } catch (error) {
             console.error("Error deleting user:", error);
-            alert("Failed to delete user.");
+            toast("Failed to delete user.");
         }
     };
 

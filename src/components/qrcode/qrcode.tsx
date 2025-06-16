@@ -1,5 +1,5 @@
 import { QRCode } from "react-qrcode-logo";
-import logo from './Screenshot 2025-02-15 at 8.09.28 PM.png';
+import logo from './chuha.png';
 
 const QRCodeComponent = () => {
   const url = "https://vk-electronics.netlify.app/";

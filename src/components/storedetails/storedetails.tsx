@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import "./storedetails.scss";
-import pic from "../qrcode/Screenshot 2025-02-15 at 8.09.28 PM.png"
+import pic from "../qrcode/vivek.jpg"
 
 interface StoreDetailsProps {
   isOpen: boolean;
@@ -44,7 +44,7 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({ isOpen, onClose }) => {
           />
           
           <div className="store-details">
-            <p><strong>📞 Contact:</strong> +91 7420 8683 46</p>
+            <p><strong>📞 Contact:</strong> +91 9011 1262 23</p>
             <p><strong>📍 Address:</strong> Bangra Bazar, Lohari Bari, Bhatpar Rani, Deoria, Uttar Pradesh, India</p>
             <p><strong>📮 Pin Code:</strong> 274704</p>
           </div>

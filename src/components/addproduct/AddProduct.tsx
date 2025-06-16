@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./addProduct.scss"; // Optional styling
 
 interface Product {
@@ -51,7 +53,7 @@ const AddProduct: React.FC = () => {
     if (password === "vivek") {
       setIsAuthorized(true);
     } else {
-      alert("❌ Incorrect Password!");
+      toast("❌ Incorrect Password!");
     }
   };
 
@@ -88,7 +90,7 @@ const AddProduct: React.FC = () => {
       await axios.post("https://vk-electronics-backend.onrender.com/products", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      alert("✅ Product Added Successfully!");
+      toast("✅ Product Added Successfully!");
       setProduct({
         name: "",
         description: "",
@@ -105,7 +107,7 @@ const AddProduct: React.FC = () => {
       });
     } catch (error) {
       console.error("Error adding product:", error);
-      alert("❌ Failed to add product!");
+      toast("❌ Failed to add product!");
     } finally {
       setIsLoading(false); // Stop loading after the process
     }

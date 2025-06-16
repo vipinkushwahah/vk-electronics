@@ -4,6 +4,8 @@ import { authState } from "../LoginSignup/state";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import VanillaTilt from "vanilla-tilt";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import UserManagement from "./UserManagement/UserManagement";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -67,7 +69,7 @@ const LoginSignup: React.FC<{
     }
 
     if (errors.length > 0) {
-      alert(errors.join("\n"));
+      toast.error(errors.join("\n"));
       setErrorFields(errorInputs);
       setAuth((prev) => ({ ...prev, loading: false }));
       return;
@@ -100,13 +102,13 @@ const LoginSignup: React.FC<{
       const response = await axios.post(url, payload);
 
       if (auth.authView === "forgotPassword") {
-        alert("Password reset successful! You can now log in.");
+        toast.success("Password reset successful! You can now log in.");
         setAuth((prev) => ({ ...prev, authView: "login" }));
       } else if (auth.authView === "signup") {
-        alert("Signup successful! You can now log in.");
+        toast.success("Signup successful! You can now log in.");
         setAuth((prev) => ({ ...prev, authView: "login" }));
       } else {
-        alert(response.data.message);
+        toast.success(response.data.message || "Login successful!");
         const { userId, username, isShopkeeper } = response.data;
         onLogin(userId, username, isShopkeeper);
       }
@@ -118,10 +120,10 @@ const LoginSignup: React.FC<{
         error.response.status === 404 &&
         auth.authView === "login"
       ) {
-        alert("User not found. Redirecting to signup...");
+        toast.info("User not found. Redirecting to signup...");
         setAuth((prev) => ({ ...prev, authView: "signup" }));
       } else {
-        alert("Something went wrong. Please try again!");
+        toast.error("Something went wrong. Please try again!");
       }
     } finally {
       setAuth((prev) => ({ ...prev, loading: false }));
