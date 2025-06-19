@@ -60,7 +60,7 @@ const ProductManagement: React.FC<{ user: User | null }> = ({ user }) => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:5001/products", {
+      const response = await axios.get("https://vk-electronics-backend.onrender.com/products", {
         params: { createdBy: user?.userId }
       });
       setProducts(response.data);
@@ -118,13 +118,13 @@ const ProductManagement: React.FC<{ user: User | null }> = ({ user }) => {
     try {
       if (editingProduct) {
         await axios.put(
-          `http://localhost:5001/products/${editingProduct._id}`,
+          `https://vk-electronics-backend.onrender.com/products/${editingProduct._id}`,
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
         setEditingProduct(null);
       } else {
-        await axios.post("http://localhost:5001/products", formData, {
+        await axios.post("https://vk-electronics-backend.onrender.com/products", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
       }
@@ -179,7 +179,7 @@ const ProductManagement: React.FC<{ user: User | null }> = ({ user }) => {
         return;
       }
 
-      await axios.delete(`http://localhost:5001/products/${id}`);
+      await axios.delete(`https://vk-electronics-backend.onrender.com/products/${id}`);
       toast.success("Product deleted successfully!");
       fetchProducts();
     } catch (error) {
