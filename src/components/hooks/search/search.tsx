@@ -71,10 +71,12 @@ const SearchBar = () => {
   const handleProductSelect = (product: Product) => {
     
     if (product.category === "Smartphone") {
-      
+      console.log("Smartphone selected:", product.name);
     } else if (product.category === "home-appliance") {
-     
+      console.log("Home appliance selected:", product.name);
+      console.log("Home appliance selected:", product.name);
     } else if (product.category === "Electronics") {
+      console.log("Electronics selected:", product.name);
       
     }
   

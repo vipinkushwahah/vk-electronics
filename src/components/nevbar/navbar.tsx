@@ -17,9 +17,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   onLogout 
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState<boolean>(
-    localStorage.getItem("theme") === "dark"
-  );
+  // const [darkMode, setDarkMode] = useState<boolean>(
+  //   localStorage.getItem("theme") === "dark"
+  // );
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -31,12 +31,12 @@ export const Navbar: React.FC<NavbarProps> = ({
     setMenuOpen(false);
   };
 
-  const toggleTheme = () => {
-    const newTheme = darkMode ? "light" : "dark";
-    setDarkMode(!darkMode);
-    document.body.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
+  // const toggleTheme = () => {
+  //   const newTheme = darkMode ? "light" : "dark";
+  //   setDarkMode(!darkMode);
+  //   document.body.setAttribute("data-theme", newTheme);
+  //   localStorage.setItem("theme", newTheme);
+  // };
 
   const handleLogout = () => {
     onLogout();
@@ -44,11 +44,11 @@ export const Navbar: React.FC<NavbarProps> = ({
     closeMenu();
   };
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    document.body.setAttribute("data-theme", savedTheme);
-    setDarkMode(savedTheme === "dark");
-  }, []);
+  // useEffect(() => {
+  //   const savedTheme = localStorage.getItem("theme") || "light";
+  //   document.body.setAttribute("data-theme", savedTheme);
+  //   setDarkMode(savedTheme === "dark");
+  // }, []);
 
   return (
     <div>
@@ -58,9 +58,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Link to="/"><img src={logo} className="logo" alt="VK Electronics Logo" /></Link>
             <div className="nav-right">
               <SearchBar />
-              <div className="theme-toggle" onClick={toggleTheme}>
+              {/* <div className="theme-toggle" onClick={toggleTheme}>
                 {darkMode ? "☀️" : "🌙"}
-              </div>
+              </div> */}
               {username && (
                 <div className="user-info">
                   <RiUser3Line className="user-icon" />

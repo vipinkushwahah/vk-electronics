@@ -61,7 +61,7 @@
           border-radius: 4px;
           outline: none;
           position: absolute;
-          right: -154px !important;
+          right: -0px !important;
           z-index: 100000 !important;
           top: 85px !important;
           background: rgb(84, 82, 82);
@@ -70,7 +70,7 @@
   }
   .search-results{
     position: absolute;
-    top: 30px;
+    top: 34px;
     right: -48px;
     width: 340px;
     background: #646262;
@@ -84,8 +84,8 @@
   @media (max-width: 430px) {
   .search-results{
     position: absolute;
-    top: 106px;
-    right: -74px;
+    top: 124px;
+    right: 15px;
     width: 272px;
     background: #646262;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
