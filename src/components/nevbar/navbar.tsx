@@ -1,19 +1,27 @@
 import { useState, useEffect } from "react";
 import "./navbar.scss";
 import SearchBar from "../hooks/search/search";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from '../../assets/vklogo.png';
+import { RiLogoutBoxRLine, RiUser3Line } from "react-icons/ri";
 
 interface NavbarProps {
   isShopkeeper: boolean;
+  username: string | null;
+  onLogout: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ isShopkeeper }) => {
+export const Navbar: React.FC<NavbarProps> = ({ 
+  isShopkeeper, 
+  username, 
+  onLogout 
+}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState<boolean>(
     localStorage.getItem("theme") === "dark"
   );
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -30,6 +38,12 @@ export const Navbar: React.FC<NavbarProps> = ({ isShopkeeper }) => {
     localStorage.setItem("theme", newTheme);
   };
 
+  const handleLogout = () => {
+    onLogout();
+    navigate("/");
+    closeMenu();
+  };
+
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     document.body.setAttribute("data-theme", savedTheme);
@@ -41,12 +55,18 @@ export const Navbar: React.FC<NavbarProps> = ({ isShopkeeper }) => {
       <nav className="navbar">
         <div className="logo-menu-container">
           <div className="menu-btn-container">
-            <Link to="/"><img src={logo} className="logo" /></Link>
+            <Link to="/"><img src={logo} className="logo" alt="VK Electronics Logo" /></Link>
             <div className="nav-right">
               <SearchBar />
               <div className="theme-toggle" onClick={toggleTheme}>
                 {darkMode ? "☀️" : "🌙"}
               </div>
+              {username && (
+                <div className="user-info">
+                  <RiUser3Line className="user-icon" />
+                  <span className="username">{username}</span>
+                </div>
+              )}
               <div className="menu-btn" onClick={() => setMenuOpen(true)}>☰</div>
             </div>
           </div>
@@ -63,13 +83,23 @@ export const Navbar: React.FC<NavbarProps> = ({ isShopkeeper }) => {
 
               {isShopkeeper && (
                 <>
-                  <li><Link to="/add-product" onClick={closeMenu}>Add Product</Link></li>
+                  {/* <li><Link to="/add-product" onClick={closeMenu}>Add Product</Link></li> */}
                   <li><Link to="/manage-products" onClick={closeMenu}>Manage Products</Link></li>
                 </>
               )}
 
               <li><Link to="/contect" onClick={closeMenu}>Contact Us</Link></li>
-              <li><Link to="login" onClick={closeMenu}>Login & Signup</Link></li>
+              {/* <li><Link to="/repair-services" onClick={closeMenu}>Repair Services</Link></li> */}
+
+              {username ? (
+                <>
+                  <li className="logout-btn" onClick={handleLogout}>
+                    <RiLogoutBoxRLine /> Logout
+                  </li>
+                </>
+              ) : (
+                <li><Link to="login" onClick={closeMenu}>Login & Signup</Link></li>
+              )}
             </ul>
           </div>
         </div>
@@ -81,6 +111,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isShopkeeper }) => {
           <li><Link to="smartphone">SmartPhone</Link></li>
           <li><Link to="electronics">Electronics</Link></li>
           <li><Link to="home-appliance">Home-Appliances</Link></li>
+          {/* <li><Link to="/repair-services">Repair Services</Link></li> */}
         </div>
       </div>
     </div>

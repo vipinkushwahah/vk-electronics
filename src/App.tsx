@@ -29,23 +29,42 @@ import FotterLogin from "./components/fotter/fotterlogin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+interface User {
+  userId: string | null;
+  username: string | null;
+  isShopkeeper: boolean;
+}
+
 const App: React.FC = () => {
-  const [userId, setUserId] = useState<string | null>(null);
-  const [username, setUsername] = useState<string | null>(null);
-  const [isShopkeeper, setIsShopkeeper] = useState<boolean>(false);
+  const [user, setUser] = useState<User>({
+    userId: null,
+    username: null,
+    isShopkeeper: false,
+  });
+
+  const handleLogin = (userId: string, username: string, isShopkeeper: boolean) => {
+    setUser({
+      userId,
+      username,
+      isShopkeeper,
+    });
+  };
+
+  const handleLogout = () => {
+    setUser({
+      userId: null,
+      username: null,
+      isShopkeeper: false,
+    });
+  };
 
   return (
     <HelmetProvider>
       <Router>
         <MainApp
-          userId={userId}
-          username={username}
-          isShopkeeper={isShopkeeper}
-          handleLogin={(id, name, isShopkeeper) => {
-            setUserId(id);
-            setUsername(name);
-            setIsShopkeeper(isShopkeeper);
-          }}
+          user={user}
+          handleLogin={handleLogin}
+          handleLogout={handleLogout}
         />
         {/* ✅ Toast Container at top level */}
         <ToastContainer position="top-right" autoClose={3000} />
@@ -55,27 +74,25 @@ const App: React.FC = () => {
 };
 
 interface MainAppProps {
-  userId: string | null;
-  username: string | null;
-  isShopkeeper: boolean;
+  user: User;
   handleLogin: (
     userId: string,
     username: string,
     isShopkeeper: boolean
   ) => void;
+  handleLogout: () => void;
 }
 
 const MainApp: React.FC<MainAppProps> = ({
-  userId,
-  username,
-  isShopkeeper,
+  user,
   handleLogin,
+  handleLogout,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
   // Login page override for /reviews
-  if (location.pathname === "/reviews" && !userId) {
+  if (location.pathname === "/reviews" && !user.userId) {
     return (
       <div className="LoginSignup-main-container">
         <Header />
@@ -87,7 +104,11 @@ const MainApp: React.FC<MainAppProps> = ({
 
   return (
     <>
-      <Navbar isShopkeeper={isShopkeeper} />
+      <Navbar 
+        isShopkeeper={user.isShopkeeper} 
+        username={user.username}
+        onLogout={handleLogout}
+      />
       <div className="App">
         <Routes>
           <Route path="/" element={<Hero />} />
@@ -105,7 +126,7 @@ const MainApp: React.FC<MainAppProps> = ({
                   onLogin={(id, name, isShopkeeper) => {
                     handleLogin(id, name, isShopkeeper);
                     if (isShopkeeper) {
-                      navigate("/add-product");
+                      navigate("/manage-products");
                     } else {
                       navigate("/");
                     }
@@ -119,20 +140,37 @@ const MainApp: React.FC<MainAppProps> = ({
             element={
               <ReviewComponent
                 productId="60f3b3b3b3b3b3b3b3b3b3b3"
-                userId={userId || ""}
-                username={username || ""}
-                isShopkeeper={isShopkeeper}
+                userId={user.userId || ""}
+                username={user.username || ""}
+                isShopkeeper={user.isShopkeeper}
               />
             }
           />
 
-          {/* ✅ Only show these routes if user is shopkeeper */}
-          {isShopkeeper && (
+          {/* ✅ Shopkeeper-only routes */}
+          {user.isShopkeeper && (
             <>
-              <Route path="/add-product" element={<AddProduct />} />
-              <Route path="/manage-products" element={<ProductManagement />} />
+              <Route 
+                path="/add-product" 
+                element={<AddProduct />} 
+              />
+              <Route 
+                path="/manage-products" 
+                element={
+                  <ProductManagement 
+                    user={{
+                      userId: user.userId || "",
+                      username: user.username || "",
+                      isShopkeeper: user.isShopkeeper
+                    }} 
+                  />
+                } 
+              />
             </>
           )}
+
+          {/* ✅ Redirect to home for any unknown routes */}
+          <Route path="*" element={<Hero />} />
         </Routes>
       </div>
       <Footer />
