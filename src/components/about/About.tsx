@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Shield, Award, Users } from 'lucide-react';
-import './about.scss';
+import './About.scss';
 
 const AboutPage: React.FC = () => {
   useEffect(() => {
