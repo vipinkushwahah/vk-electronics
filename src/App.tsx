@@ -1,5 +1,6 @@
 import "./App.scss";
-import { Navbar } from "./components/nevbar/navbar";
+import './index.css';
+import  Navbar  from "./components/nevbar/navbar";
 import "remixicon/fonts/remixicon.css";
 import {
   BrowserRouter as Router,
@@ -9,13 +10,13 @@ import {
   useNavigate,
 } from "react-router-dom";
 import ProductList from "./components/products/productlist/productlist";
-import { Hero } from "./components/Hero/hero";
+import  Hero  from "./components/Hero/hero";
 import GadgetsList from "./components/electronic/electronic";
 import HomeAppliances from "./components/homeappliance/homeappliance";
 import Footer from "./components/fotter/fotter";
 import AddProduct from "./components/addproduct/AddProduct";
 import ProductManagement from "./components/product/ProductManagement";
-import ProductDetails from "./components/productdetails/productdetails";
+// import ProductDetails from "./components/productdetails/productdetails";
 import { HelmetProvider } from "react-helmet-async";
 import Contact from "./components/contect/contect";
 import React, { useState } from "react";
@@ -28,6 +29,11 @@ import FotterLogin from "./components/fotter/fotterlogin";
 // ✅ Toastify
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AboutPage from "./components/about/About";
+import CartPage from "./components/pages/CartPage";
+// import SellDevicePage from "./components/SellDevicePage/SellDevicePage";
+// import HomePage from "./components/pages/HomePage";
+// import PricePage from "./components/pages/PricePage";
 
 interface User {
   userId: string | null;
@@ -115,8 +121,13 @@ const MainApp: React.FC<MainAppProps> = ({
           <Route path="/smartphone" element={<ProductList />} />
           <Route path="/electronics" element={<GadgetsList />} />
           <Route path="/home-appliance" element={<HomeAppliances />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
+          {/* <Route path="/product/:id" element={<ProductDetails />} /> */}
+          {/* <Route path="/sell" element={<SellDevicePage />} /> */}
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/contect" element={<Contact />} />
+          <Route path="/cart" element={<CartPage />} />
+          {/* <Route path="/home" element={<HomePage />} /> */}
+          {/* <Route path="/price/:deviceName" element={<PricePage />} /> */}
           <Route path="/repair-services" element={<RepairServices />} />
           <Route
             path="/login"

@@ -1,0 +1,72 @@
+.about-section {
+    padding: 6rem 0;
+  }
+  
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .about-content {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+  
+  .about-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-subheading {
+    font-size: 1.125rem;
+    color: #6c757d;
+    margin-bottom: 3rem;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .feature-card {
+    text-align: center;
+  }
+  
+  .feature-icon {
+    width: 3rem;
+    height: 3rem;
+    margin: 0 auto 1rem;
+    color: #3b82f6;
+  }
+  
+  .feature-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .feature-description {
+    color: #6c757d;
+  }
+  
+  .our-story {
+    .story-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+  
+    p {
+      margin-bottom: 1rem;
+      color: #343a40;
+      line-height: 1.6;
+    }
+  }
+  

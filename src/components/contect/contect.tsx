@@ -44,7 +44,7 @@ const Contact = () => {
 
 
     return (
-        <div>
+        <div className="main-container-contact">
             {/* <div>
                 <img
                     className="main_image"
