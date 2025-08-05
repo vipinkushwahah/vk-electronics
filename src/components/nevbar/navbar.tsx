@@ -48,7 +48,7 @@ const Navbar: React.FC<NavbarProps> = ({ isShopkeeper, username, onLogout }) => 
     },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contect' },
-    { name: 'Cart', path: '/cart' },
+    // { name: 'Cart', path: '/cart' },
     { name: 'Login', path: '/login' },
   ];
   return (
@@ -122,7 +122,7 @@ const Navbar: React.FC<NavbarProps> = ({ isShopkeeper, username, onLogout }) => 
               <li><Link to="/smartphone" onClick={() => setIsOpen(false)}>SmartPhone</Link></li>
               <li><Link to="/electronics" onClick={() => setIsOpen(false)}>Electronics</Link></li>
               <li><Link to="/home-appliance" onClick={() => setIsOpen(false)}>Home-Appliances</Link></li>
-              <li><Link to="/cart" onClick={() => setIsOpen(false)}>cart</Link></li>
+              {/* <li><Link to="/cart" onClick={() => setIsOpen(false)}>cart</Link></li> */}
               {isShopkeeper && (
                 <li><Link to="/manage-products" onClick={() => setIsOpen(false)}>Manage Products</Link></li>
               )}

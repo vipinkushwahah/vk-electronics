@@ -50,10 +50,10 @@ const HomeAppliances: React.FC = () => {
     }
   };
 
-  const handleAddToCart = (product: Appliance) => {
-    console.log("Add to cart:", product);
-    // Add actual cart logic here
-  };
+  // const handleAddToCart = (product: Appliance) => {
+  //   console.log("Add to cart:", product);
+  //   // Add actual cart logic here
+  // };
 
   const handleProductClick = (appliance: Appliance) => {
     setSelectedProductId(appliance._id);
@@ -113,12 +113,12 @@ const HomeAppliances: React.FC = () => {
               features: appliance.features || [],
               brand: appliance.brand,
             }}
-            onAddToCart={(product) =>
-              handleAddToCart({
-                ...product,
-                name: product.name || "Unnamed Appliance",
-              })
-            }
+            // onAddToCart={(product) =>
+            //   handleAddToCart({
+            //     ...product,
+            //     name: product.name || "Unnamed Appliance",
+            //   })
+            // }
             onClick={() => handleProductClick(appliance)}
             onDelete={() => {}}
           />

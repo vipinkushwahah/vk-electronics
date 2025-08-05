@@ -53,10 +53,10 @@ const ElectronicGadgets: React.FC = () => {
     }
   };
 
-  const handleAddToCart = (product: Gadget) => {
-    console.log("Add to cart:", product);
-    // Add actual cart logic here
-  };
+  // const handleAddToCart = (product: Gadget) => {
+  //   console.log("Add to cart:", product);
+  //   // Add actual cart logic here
+  // };
 
   const handleProductClick = (gadget: Gadget) => {
     setSelectedProductId(gadget._id);
@@ -119,12 +119,12 @@ const ElectronicGadgets: React.FC = () => {
               features: gadget.features || [],
               brand: gadget.brand ,
             }}
-            onAddToCart={(product) =>
-              handleAddToCart({
-                ...product,
-                name: product.name || "Unnamed Gadget",
-              })
-            }
+            // onAddToCart={(product) =>
+            //   handleAddToCart({
+            //     ...product,
+            //     name: product.name || "Unnamed Gadget",
+            //   })
+            // }
             onClick={() => handleProductClick(gadget)}
             onDelete={() => {}}
           />

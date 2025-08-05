@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../product";
 import axios from "axios";
 import SkeletonLoader from "../../hooks/skeletonloader/skeletonloader";
-import useCart from "../../../context/CartContext";
+// import useCart from "../../../context/CartContext";
 import ProductDetails from "../../productdetails/productdetails"; // Import modal
 
 interface Product {
@@ -28,7 +28,7 @@ const ProductList: React.FC = () => {
   const [error, setError] = useState<string>("");
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
 
-  const { addToCart } = useCart();
+  // const { addToCart } = useCart();
 
   useEffect(() => {
     fetchProducts();
@@ -87,7 +87,7 @@ const ProductList: React.FC = () => {
             key={product._id}
             product={product}
             onDelete={handleDelete}
-            onAddToCart={addToCart}
+            // onAddToCart={addToCart}
             onClick={() => setSelectedProductId(product._id)} // Open modal on click
           />
         ))}

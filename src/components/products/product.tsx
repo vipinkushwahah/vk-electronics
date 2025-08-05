@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, ShoppingCart, Zap, Truck } from 'lucide-react';
+import { Star, Zap, Truck, Info } from 'lucide-react';
 import './product.scss';
 
 interface Product {
@@ -30,14 +30,14 @@ interface ProductCardProps {
   product: Product;
   onDelete: (id: string) => void;
   onClick: () => void; // Open modal
-  onAddToCart: (product: Product) => void;
+  // onAddToCart: (product: Product) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onClick, onAddToCart }) => {
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent triggering onClick (modal open)
-    onAddToCart(product);
-  };
+const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
+  // const handleAddToCart = (e: React.MouseEvent) => {
+  //   e.stopPropagation(); // Prevent triggering onClick (modal open)
+  //   // onAddToCart(product);
+  // };
 
   const imageSrc =
     product.image || (product.images && product.images[0]?.data) || '/default-image.png';
@@ -129,9 +129,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onClick, onAddToCart
             </div>
           )}
 
-          <button onClick={handleAddToCart} className="product-card__add-to-cart">
+          {/* <button onClick={handleAddToCart} className="product-card__add-to-cart">
             <ShoppingCart size={18} />
             Add to Cart
+          </button> */}
+          <button onClick={onClick} className="product-card__add-to-cart">
+            <Info size={18} />
+            View Product Details
           </button>
 
           <div className="product-card__stock-row">

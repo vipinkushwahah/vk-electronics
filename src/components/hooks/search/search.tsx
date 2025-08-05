@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./search.scss";
+import ProductDetails from "../../productdetails/productdetails";
 
 interface Product {
   _id: string;
@@ -9,14 +9,16 @@ interface Product {
   category: string;
 }
 
-const SearchBar = () => {
+const SearchBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const navigate = useNavigate();
-  const searchRef = useRef<HTMLInputElement | null>(null); // For detecting clicks outside
-  const searchContainerRef = useRef<HTMLDivElement | null>(null); // For detecting clicks outside
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const searchRef = useRef<HTMLInputElement | null>(null);
+  const searchContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     fetchProducts();
@@ -25,7 +27,10 @@ const SearchBar = () => {
   useEffect(() => {
     // Close search input if clicked outside
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
         setSearchQuery("");
         setFilteredProducts([]);
@@ -61,32 +66,25 @@ const SearchBar = () => {
   };
 
   const handleSearchKeyPress = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") {
-      if (filteredProducts.length > 0) {
-        handleProductSelect(filteredProducts[0]); // Select the first result if available
-      }
+    if (event.key === "Enter" && filteredProducts.length > 0) {
+      handleProductSelect(filteredProducts[0]);
     }
   };
 
   const handleProductSelect = (product: Product) => {
-    
-    if (product.category === "Smartphone") {
-      console.log("Smartphone selected:", product.name);
-    } else if (product.category === "home-appliance") {
-      console.log("Home appliance selected:", product.name);
-      console.log("Home appliance selected:", product.name);
-    } else if (product.category === "Electronics") {
-      console.log("Electronics selected:", product.name);
-      
-    }
-  
-    // Navigate directly to product details
-    navigate(`/product/${product._id}`);
+    console.log(`${product.category} selected:`, product.name);
+
+    setSelectedProductId(product._id);
+    setIsModalOpen(true);
     setIsOpen(false);
     setSearchQuery("");
     setFilteredProducts([]);
   };
-  
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProductId(null);
+  };
 
   return (
     <div
@@ -105,7 +103,10 @@ const SearchBar = () => {
           onClick={() => setIsOpen(true)}
           onKeyPress={handleSearchKeyPress}
         />
-        <i className="ri-search-line search-icon" onClick={() => setIsOpen(true)}></i>
+        <i
+          className="ri-search-line search-icon"
+          onClick={() => setIsOpen(true)}
+        ></i>
       </div>
 
       {isOpen && filteredProducts.length > 0 && (
@@ -116,6 +117,15 @@ const SearchBar = () => {
             </li>
           ))}
         </ul>
+      )}
+
+      {/* Product Details Modal */}
+      {selectedProductId && (
+        <ProductDetails
+          productId={selectedProductId}
+          isOpen={isModalOpen}
+          onClose={closeModal}
+        />
       )}
     </div>
   );

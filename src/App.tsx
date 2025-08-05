@@ -30,7 +30,7 @@ import FotterLogin from "./components/fotter/fotterlogin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AboutPage from "./components/about/About";
-import CartPage from "./components/pages/CartPage";
+// import CartPage from "./components/pages/CartPage";
 // import SellDevicePage from "./components/SellDevicePage/SellDevicePage";
 // import HomePage from "./components/pages/HomePage";
 // import PricePage from "./components/pages/PricePage";
@@ -125,7 +125,7 @@ const MainApp: React.FC<MainAppProps> = ({
           {/* <Route path="/sell" element={<SellDevicePage />} /> */}
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contect" element={<Contact />} />
-          <Route path="/cart" element={<CartPage />} />
+          {/* <Route path="/cart" element={<CartPage />} /> */}
           {/* <Route path="/home" element={<HomePage />} /> */}
           {/* <Route path="/price/:deviceName" element={<PricePage />} /> */}
           <Route path="/repair-services" element={<RepairServices />} />

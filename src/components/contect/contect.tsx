@@ -2,7 +2,7 @@ import { useState } from "react";
 import emailjs from '@emailjs/browser';
 import "./contect.scss";
 import QRCodeComponent from "../qrcode/qrcode";
-import saturo from "../../assets/saturo.png"; // Import your image here
+import saturo from "../../assets/gojo.jpg"; // Import your image here
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -170,7 +170,7 @@ const Contact = () => {
                 <div className="map-container">
                     <iframe
                         title="Store Location"
-                        src="https://www.google.com/maps/embed?pb=!4v1739609120394!6m8!1m7!1spxfgliH22OvF1mjLsA3bZA!2m2!1d26.33508912044648!2d84.10975621594844!3f209.53424!4f0!5f0.7820865974627469"
+                        src="https://www.google.com/maps/embed?pb=!1m13!1m11!1m3!1d476.7077009390442!2d84.10975621435678!3d26.335089124857774!2m2!1f0!2f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1754407403508!5m2!1sen!2sin"
                         width="100%"
                         height="300"
                         style={{ border: "none", borderRadius: "10px" }}

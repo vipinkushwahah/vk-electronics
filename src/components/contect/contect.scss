@@ -41,7 +41,7 @@ body {
   border: 6px solid rgb(236, 89, 31);
   border-top: 1px solid rgb(255, 255, 255, 0.75);
   border-left: 1px solid rgb(255, 255, 255, 0.75);
-  background-color: #0a0a0a;
+  background-color: #ffffff;
   width: 460px;
   border-radius: 20px;
 }
@@ -89,7 +89,7 @@ body {
 }
 
 .form-input {
-  width: 170px;
+  width: 378px;
   padding: 10px;
   border: 1px solid #f65b08;
   border-radius: 5px;
@@ -116,7 +116,7 @@ body {
 }
 
 .form-button:hover {
-  background: darkblue;
+  background: rgb(170, 67, 193);
 }
 
 /* Responsive Design */
